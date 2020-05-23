@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<listeners>
+		<listener class-name="com.apollo.cradle.setup.ReportListener" />
+	</listeners>
+	<test name="Test">
+		<classes>
+			<class name="com.apollo.cradle.login.Login" />
+			<!--<class name="com.apollo.cradle.booking.ProcessBookTab" />-->
+			<!--<class name="com.apollo.cradle.vitals.ProcessVitalsTab" />-->
+			<!-- <class name="com.apollo.cradle.tools.ProcessTools" /> -->
+			<!-- <class name="com.apollo.cradle.profile.ProcessEditProfile" /> -->
+			<!-- <class name="com.apollo.cradel.changes.ProcessChanges" /> -->
+			 <!--<class name="com.apollo.cradle.addfamily.ProcessAddFamily" />--> 
+			<!--<class name="com.apollo.cradle.signup.ProcessSignUp" />-->  
+			 <class name="com.apollo.cradel.menu.ProcessMenu" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
