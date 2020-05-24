@@ -3,15 +3,15 @@ package com.apollo.cradle.profile;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import com.apollo.cradle.setup.BaseDriver;
 import com.apollo.cradle.util.ApolloUtils;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-
 import io.appium.java_client.MobileBy;
 
 public class ProcessEditProfile extends BaseDriver {
@@ -173,6 +173,30 @@ public class ProcessEditProfile extends BaseDriver {
 		String mupdateBtn = "//ion-button[text()='Update ']";
 		WebElement mupdateBtnElement = driver.findElementByXPath(mupdateBtn);
 		mupdateBtnElement.click();
+		System.out.println(111);
+		/*
+		 * try { Thread.sleep(20000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * ApolloUtils.verticalScrollup(driver);
+		 */
+		//ApolloUtils.verticalScrollup(driver);
+	//	ApolloUtils.verticalScrollup(driver);
+		//ApolloUtils.verticalScrollup(driver);
+		
+		String familyslides = "//*[text()=' Update your Family History. ']";
+		
+		List<WebElement> slideElements = driver.findElementsByXPath(familyslides);
+		if(slideElements.size()==0)
+			ApolloUtils.verticalScrollup(driver);
+		else{
+			for (WebElement webElement : slideElements) {
+				System.out.println("================");
+				System.out.println(webElement.getTagName() +" :: "+webElement.getText());
+			}
+		}
+			
+			
+		//slideElement.click();
 
 	}
 
@@ -183,17 +207,11 @@ public class ProcessEditProfile extends BaseDriver {
 		ExtentTest test = reports.createTest("EditProfile - FamilyHistory");
 		test.log(Status.INFO, " FamilyHistory starts here...");
 
-		ApolloUtils.verticalScrollup(driver);
-		ApolloUtils.verticalScrollup(driver);
-		ApolloUtils.verticalScrollup(driver);
-
 		// click on Family history
-		// String familyslides = "//*[text()='Family History']";
-		// WebElement slideElement = driver.findElementByXPath(slides);
-		// slideElement.click();
-		driver.findElement(By.xpath(
-				"//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[3]"))
-				.click();
+		String familyslides = "//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[3]";
+		WebElement slideElement = driver.findElementByXPath(familyslides);
+		slideElement.click();
+		// driver.findElement(By.xpath("//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[3]")).click();
 
 		// Click on check box selector
 		String checkboxSelector = "//*[text()='Common Gynecology Problems']";
@@ -212,10 +230,18 @@ public class ProcessEditProfile extends BaseDriver {
 		ExtentTest test = reports.createTest("EditProfile - PregnancyHistory");
 		test.log(Status.INFO, " PregnancyHistory starts here...");
 
+		// click on add more pregnancy history
+		String addmore = "//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[2]/div/app-pregnancy-history/ion-row[2]/ion-col[2]/ion-button";
+		WebElement addmoreElement = driver.findElementByXPath(addmore);
+		addmoreElement.click();
+
 		// click on pregnancy history
 		String pregnancyslides = "//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[4]";
+		System.out.println(999);
 		WebElement pregnancyslidesElements = driver.findElementByXPath(pregnancyslides);
+		System.out.println(888);
 		pregnancyslidesElements.click();
+		System.out.println(777);
 
 		// click birth outcome button
 		String tabSelector = "//*[@id='menu-content']/app-add-pregnancy-history/ion-content/ion-grid/form/ion-row[1]/ion-col/ion-item[1]/ion-select";
@@ -246,7 +272,7 @@ public class ProcessEditProfile extends BaseDriver {
 		String conceptionokBtn = "//span[text()='OK']";
 		WebElement conceptionokBtnElement = driver.findElementByXPath(conceptionokBtn);
 		conceptionokBtnElement.click();
-		
+
 		// click on delivey and select C-section
 		String delivery = "//*[@id=\"menu-content\"]/app-add-pregnancy-history/ion-content/ion-grid/form/ion-row[1]/ion-col/ion-item[3]/ion-select";
 		WebElement deliveryElement = driver.findElementByXPath(delivery);
@@ -283,9 +309,9 @@ public class ProcessEditProfile extends BaseDriver {
 		WebElement commentsElemet = driver.findElementByXPath(comments);
 		commentsElemet.clear();
 		commentsElemet.sendKeys("good healty");
-		
+
 		ApolloUtils.verticalScroll(driver);
-		
+
 		// Click on Add history
 		String addHistory = "//*[text()='Add History ']";
 		WebElement addHistoryElement = driver.findElementByXPath(addHistory);
