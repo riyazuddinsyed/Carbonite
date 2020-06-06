@@ -28,7 +28,7 @@ public class ProcessTools extends BaseDriver {
 		bmiElement.click();
 
 		// click on your Gender
-		String gender = "//*[text()='Female']";
+		String gender = "//*[text()='" + testdata.get("bloodCalculationGender") + "']";
 		WebElement genderElement = driver.findElementByXPath(gender);
 		genderElement.click();
 
@@ -87,16 +87,12 @@ public class ProcessTools extends BaseDriver {
 		test.log(Status.PASS, "Verify the click on forward your bmi history");
 
 		// click on forward button history
-		String fbhistory = "(//*[@class='buttons-first-slot sc-ion-buttons-md-h sc-ion-buttons-md-s md hydrated'])[2]";
-		WebElement fbhistoryyElement = driver.findElementByXPath(fbhistory);
-		fbhistoryyElement.click();
+		driver.navigate().back();
 
 		test.log(Status.PASS, "Verify forward button history");
 
-		// click on bmi forward button
-		String bmiford = "(//*[@class='buttons-first-slot sc-ion-buttons-md-h sc-ion-buttons-md-s md hydrated'])[1]";
-		WebElement bmifordElement = driver.findElementByXPath(bmiford);
-		bmifordElement.click();
+		// click on bmi back button
+		driver.navigate().back();
 
 		test.log(Status.PASS, "Verify click on bmi forward button");
 
@@ -109,14 +105,12 @@ public class ProcessTools extends BaseDriver {
 		test.log(Status.INFO, "OvulationCalculator starts here...");
 
 		// Click on the tools
-		String ovulationtools = "//*[@id=\"tab-button-calculator\"]";
-		WebElement ovulationtoolsElements = driver.findElementByXPath(ovulationtools);
-		ovulationtoolsElements.click();
-
-		test.log(Status.PASS, "Verify Click on the tools");
+		String otools = "//*[@id=\"tab-button-calculator\"]";
+		WebElement otoolsElements = driver.findElementByXPath(otools);
+		otoolsElements.click();
 
 		// click on Ovulation Calculator
-		String ovulation = "//*[@id=\"menu-content\"]/app-tabs/ion-tabs/div/ion-router-outlet/app-calculators/ion-content/ion-grid/ion-row[2]/ion-col[2]/ion-button";
+		String ovulation = "//*[text()='Ovulation']";
 		WebElement ovulationElement = driver.findElementByXPath(ovulation);
 		ovulationElement.click();
 
@@ -126,12 +120,12 @@ public class ProcessTools extends BaseDriver {
 		firstdayElement.click();
 
 		// click on day
-		String lastdays = "//button[text()='19']";
+		String lastdays = "//button[text()='" + testdata.get("ovulationCalculatorDay") + "']";
 		WebElement lastdaysBtnElement = driver.findElementByXPath(lastdays);
 		lastdaysBtnElement.click();
 
 		// click on month
-		String periodmonth = "//button[text()='Apr']";
+		String periodmonth = "//button[text()='" + testdata.get("ovulationCalculatorMonth") + "']";
 		WebElement periodmonthBtnElement = driver.findElementByXPath(periodmonth);
 		periodmonthBtnElement.click();
 
@@ -151,11 +145,11 @@ public class ProcessTools extends BaseDriver {
 		// click on calculate fertile days
 		String fertiledays = "//*[text()=' Calculate Fertile Days ']";
 		WebElement fertiledaysElement = driver.findElementByXPath(fertiledays);
+
+		while (!fertiledaysElement.isDisplayed()) {
+			ApolloUtils.verticalScroll(driver);
+		}
 		fertiledaysElement.click();
-
-		ApolloUtils.verticalScroll(driver);
-		ApolloUtils.verticalScroll(driver);
-
 
 		// click on fertility article
 		String article = "//*[@id=\"menu-content\"]/app-ovulation-result/ion-content/ion-grid/ion-row[4]/ion-col/app-blog-slider/ion-row/ion-col[2]/ion-slides/div[1]/ion-slide[2]/ion-row/ion-col/a/ion-row/ion-row/ion-col";
@@ -166,32 +160,29 @@ public class ProcessTools extends BaseDriver {
 				"Verify that the graphical view, calendar view, and relevant articles are displayed after selecting the date of the last period and cycle length by clicking the Calculate fertile days button");
 
 		// click on back fertility page
-		String fertilityback = "(//button[@class='button-native sc-ion-back-button-md'])[3]";
+		String fertilityback = "//*[@id='menu-content']/app-ovulation-result/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
 		WebElement fertilitybackElement = driver.findElementByXPath(fertilityback);
 		fertilitybackElement.click();
 
 		test.log(Status.PASS, "Verify click on back fertility page");
 		
-		//click on graph page back
-		String graph="//*[@id='menu-content']/app-ovulation-result/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement graphElement= driver.findElementByXPath(graph);
-		graphElement.click();
-	
-
+		//click on ovulation back button
+		String ovulationBackBtn="//*[@id=\"menu-content\"]/app-ovulation/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
+		WebElement ovulationBackBtnElement = driver.findElementByXPath(ovulationBackBtn);
+		ovulationBackBtnElement.click();
+		
 	}
 
 	@Test(priority = 3)
-	public void dueDateCalculator() throws InterruptedException {
+	public void dueDateCalculator() {
 
 		ExtentTest test = reports.createTest("tools - DueDateCalculator");
 		test.log(Status.INFO, "DueDateCalculator starts here...");
 
-		// Click on the tools
-		String kicktools = "//*[@id='tab-button-calculator']";
-		WebElement kicktoolsElements = driver.findElementByXPath(kicktools);
-		kicktoolsElements.click();
-
-		test.log(Status.PASS, "Verify Click on the tools");
+		// click on tools
+		String datetools = "//*[@id=\"tab-button-calculator\"]";
+		WebElement datetoolsElements = driver.findElementByXPath(datetools);
+		datetoolsElements.click();
 
 		// click on due date calculator
 		String due = "//*[@id=\"menu-content\"]/app-tabs/ion-tabs/div/ion-router-outlet/app-calculators/ion-content/ion-grid/ion-row[2]/ion-col[3]/ion-button";
@@ -200,20 +191,13 @@ public class ProcessTools extends BaseDriver {
 
 		test.log(Status.PASS, "Verify on due date calculator");
 
-		// click on last period start date
-		String lastdate = "//*[@id='menu-content']/app-due-date/ion-content/ion-grid/form/div/ion-row[2]/ion-col/ion-item/ion-datetime";
-		WebElement lastdateElement = driver.findElementByXPath(lastdate);
-		lastdateElement.click();
-
-		test.log(Status.PASS, "Verify on last period start date");
-
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("dueDateCalculatorDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		// click on month
-		String month = "//button[text()='Apr']";
+		String month = "//button[text()='" + testdata.get("dueDateCalculatorMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -251,8 +235,6 @@ public class ProcessTools extends BaseDriver {
 
 		test.log(Status.PASS, "Verify on due date calculator back button");
 
-		Thread.sleep(2000);
-
 	}
 
 	@Test(priority = 4)
@@ -260,20 +242,11 @@ public class ProcessTools extends BaseDriver {
 
 		ExtentTest test = reports.createTest("tools - KickCounter");
 		test.log(Status.INFO, "KickCounter starts here...");
-		
-		
-		
-		// Click on the tools
-		String kicktools = "//*[@id='tab-button-calculator']";
-		WebElement kicktoolsElements = driver.findElementByXPath(kicktools);
-		kicktoolsElements.click();
 
-		test.log(Status.PASS, "Verify click on tools tab");
-		
 		ApolloUtils.verticalScroll(driver);
-		
+
 		// click on kick counter tab
-		String kicktab = "//*[@id=\"menu-content\"]/app-tabs/ion-tabs/div/ion-router-outlet/app-calculators/ion-content/ion-grid/ion-row[2]/ion-col[4]/ion-button";
+		String kicktab = "//span[text()='Kick']";
 		WebElement kicktabElement = driver.findElementByXPath(kicktab);
 		kicktabElement.click();
 
@@ -305,21 +278,23 @@ public class ProcessTools extends BaseDriver {
 				"Verify that the given baby's kick counter has been added correctly or not after clicking the play icon and clicking the kick icon and stop the timer");
 
 		// click on history page back
-	/*	String backhistory = "//*[@id='menu-content']/app-kick-history/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement backhistoryElement = driver.findElementByXPath(backhistory);
-		backhistoryElement.click();
-*/
+		/*
+		 * String backhistory =
+		 * "//*[@id='menu-content']/app-kick-history/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		 * WebElement backhistoryElement = driver.findElementByXPath(backhistory);
+		 * backhistoryElement.click();
+		 */
 		driver.navigate().back();
 		test.log(Status.PASS, "Verify click on history page back");
 
 		// cick on count baby kick page back button
-		String babykickback = "//*[@id=\"menu-content\"]/app-kick-counter/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		System.out.println(1);
-		WebElement babykickbackElement = driver.findElementByXPath(babykickback);
-		System.out.println(2);
-		babykickbackElement.click();
-		System.out.println(3);
-		
+		/*
+		 * String babykickback =
+		 * "//*[@id='menu-content']/app-kick-counter/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		 * System.out.println(1); WebElement babykickbackElement =
+		 * driver.findElementByXPath(babykickback); System.out.println(2);
+		 * babykickbackElement.click(); System.out.println(3);
+		 */ driver.navigate().back();
 		test.log(Status.PASS, "Verify cick on count baby kick page back button");
 
 	}
@@ -331,7 +306,7 @@ public class ProcessTools extends BaseDriver {
 		test.log(Status.INFO, "ContractionTimer starts here...");
 
 		ApolloUtils.verticalScroll(driver);
-		
+
 		// Click on the tools
 		String kicktools = "//*[@id=\"tab-button-calculator\"]";
 		WebElement kicktoolsElements = driver.findElementByXPath(kicktools);
@@ -342,7 +317,7 @@ public class ProcessTools extends BaseDriver {
 		ApolloUtils.verticalScroll(driver);
 
 		// click on Contraction timer
-		String timer = "//*[@id=\"menu-content\"]/app-tabs/ion-tabs/div/ion-router-outlet/app-calculators/ion-content/ion-grid/ion-row[2]/ion-col[5]/ion-button";
+		String timer = "//span[text()='Contraction']";
 		driver.findElementByXPath(timer).click();
 
 		test.log(Status.PASS, "Verify on Contraction timer");

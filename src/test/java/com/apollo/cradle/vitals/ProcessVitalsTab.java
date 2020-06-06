@@ -1,7 +1,12 @@
 package com.apollo.cradle.vitals;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import com.apollo.cradle.setup.BaseDriver;
@@ -12,8 +17,8 @@ import com.aventstack.extentreports.Status;
 import io.appium.java_client.MobileBy;
 
 public class ProcessVitalsTab extends BaseDriver {
-	@Test(priority=1)
-	public void bloodSugar() { 
+	@Test(priority = 1)
+	public void bloodSugar() {
 		ExtentTest test = reports.createTest("vitals - Blood Sugar");
 		test.log(Status.INFO, " Blood Sugar starts here...");
 
@@ -29,25 +34,41 @@ public class ProcessVitalsTab extends BaseDriver {
 		WebElement bloodSugarBtnElement = driver.findElement(MobileBy.cssSelector(bloodSugar));
 		bloodSugarBtnElement.click();
 
+		// click on your blood sugar
+		String historyBtn = "//*[text()='Log your Blood Sugar']";
+		List<WebElement> btns = driver.findElementsByXPath(historyBtn);
+		if (btns.size() == 1) {
+			btns.get(0).click();
+			bloodSugarPage(test);
+		} else {
+			bloodSugarPage(test);
+		}
 		test.log(Status.PASS, "Verify blood sugar tab");
 
-		// click on your blood sugar button in history page
-		String historyBtn = "//*[@id='menu-content']/app-past-blood-sugar/ion-row/ion-col/ion-button";
-		WebElement historyBtnElement = driver.findElementByXPath(historyBtn);
-		historyBtnElement.click();
+		// click on back button for blood sugar
+		driver.navigate().back();
 
+		// click on blood sugar back tab
+		driver.navigate().back();
+		
+		//click on history tab  back button
+		driver.navigate().back();
+
+	}
+
+	private void bloodSugarPage(ExtentTest test) {
 		// click on date
 		String bloodSugarBtn = "//*[@id='menu-content']/app-blood-sugar/ion-content/ion-grid/form/div/ion-row/ion-col[2]/ion-item[1]/ion-datetime";
 		WebElement bloodSugarElement = driver.findElementByXPath(bloodSugarBtn);
 		bloodSugarElement.click();
 
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("bloodSugarDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		// click on month
-		String month = "//button[text()='May']";
+		String month = "//button[text()='" + testdata.get("bloodSugarMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -69,8 +90,8 @@ public class ProcessVitalsTab extends BaseDriver {
 		test.log(Status.PASS, "Verify that log your blood sugar opens a form for the user which contains time.");
 
 		// click on done button
-		String timeclickBtn = "#ion-overlay-2 > div > div.picker-toolbar.sc-ion-picker-md > div:nth-child(2) > button";
-		WebElement timeclickBtnElement = driver.findElement(MobileBy.cssSelector(timeclickBtn));
+		String timeclickBtn = "//*[text()='Done']";
+		WebElement timeclickBtnElement = driver.findElementByXPath(timeclickBtn);
 		timeclickBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on done button ");
@@ -99,20 +120,12 @@ public class ProcessVitalsTab extends BaseDriver {
 		savedataElement.click();
 
 		test.log(Status.PASS, "Verify click on savedata button ");
-
-		// click on back button for blood sugar
-		String sugarBtn = "//*[@id=\"menu-content\"]/app-past-blood-sugar/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement sugarBtnElement = driver.findElementByXPath(sugarBtn);
-		sugarBtnElement.click();
-
-		// click on blood sugar back tab
-		String sugarbacktab = "//*[@id='menu-content']/app-blood-sugar/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement sugarbacktabElement = driver.findElementByXPath(sugarbacktab);
-		sugarbacktabElement.click();
+		
+		
 
 	}
 
-	@Test(priority=2)
+	@Test(priority = 2)
 	private void bloodPressure() {
 		ExtentTest test = reports.createTest("vitals - BloodPressure");
 		test.log(Status.INFO, "BloodPressure starts here...");
@@ -125,19 +138,45 @@ public class ProcessVitalsTab extends BaseDriver {
 		test.log(Status.PASS, "Verify click on menu for vitals button ");
 
 		// click on blood pressure
-		String calculateBloodBtn = "#menu-content > app-tabs > ion-tabs > div > ion-router-outlet > app-vitals > ion-content > ion-grid > ion-row.calculators-wrap.md.hydrated > ion-col:nth-child(2) > ion-button";
-		WebElement calculateBloodElement = driver.findElement(MobileBy.cssSelector(calculateBloodBtn));
+		String calculateBloodBtn = "//*[@id=\"menu-content\"]/app-tabs/ion-tabs/div/ion-router-outlet/app-vitals/ion-content/ion-grid/ion-row[2]/ion-col[2]/ion-button";
+		WebElement calculateBloodElement = driver.findElementByXPath(calculateBloodBtn);
 		calculateBloodElement.click();
+
+		// click on your blood pressure history button
+		String historyBtn = "//*[text()='Log Blood Pressure']";
+		List<WebElement> btns = driver.findElementsByXPath(historyBtn);
+		if (btns.size() == 1) {
+			btns.get(0).click();
+			bloodPressurePage(test);
+
+		} else {
+			bloodPressurePage(test);
+		}
 
 		test.log(Status.PASS,
 				"Verify that there is a log your blood sugar button at the bottom of the screen which can be used to log another set of data");
 
-		// click on your blood pressure history button
-		// *[@id='menu-content']/app-past-blood-pressure/ion-row/ion-col/ion-button
-		String historyBtn = "//*[@id=\"menu-content\"]/app-past-blood-pressure/ion-row/ion-col/ion-button";
-		WebElement historyBtnElement = driver.findElementByXPath(historyBtn);
-		historyBtnElement.click();
+		
+		/*String backBtn = "//*[@id=\"menu-content\"]/app-past-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement backBtnElement = driver.findElementByXPath(backBtn);
+		backBtnElement.click();
+*/		
+		// click on back button to history page
+		driver.navigate().back();
 
+		
+	/*	String backpressure = "//*[@id='menu-content']/app-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement backpressureElement = driver.findElementByXPath(backpressure);
+		backpressureElement.click();*/
+		
+		// click on blood pressure back button
+		driver.navigate().back();
+		driver.navigate().back();
+		
+		
+	}
+
+	private void bloodPressurePage(ExtentTest test) {
 		// click on date
 		String dateBtn = "//*[@id=\"menu-content\"]/app-blood-pressure/ion-content/ion-grid/form/div/ion-row/ion-col[2]/ion-item[1]/ion-datetime";
 		WebElement dateElement = driver.findElementByXPath(dateBtn);
@@ -146,12 +185,12 @@ public class ProcessVitalsTab extends BaseDriver {
 		test.log(Status.PASS, "Verify that log your blood pressure opens a form which contains date.");
 
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("bloodPressureDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		// click on month
-		String month = "//button[text()='May']";
+		String month = "//button[text()='" + testdata.get("bloodPressureMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -202,15 +241,6 @@ public class ProcessVitalsTab extends BaseDriver {
 
 		test.log(Status.PASS, "Verify save data button");
 
-		// click on back button to history page
-		String backBtn = "//*[@id=\"menu-content\"]/app-past-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement backBtnElement = driver.findElementByXPath(backBtn);
-		backBtnElement.click();
-
-		// click on blood pressure back button
-		String backpressure = "//*[@id='menu-content']/app-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement backpressureElement = driver.findElementByXPath(backpressure);
-		backpressureElement.click();
 	}
 
 	// @Test(priority=3)
@@ -276,13 +306,13 @@ public class ProcessVitalsTab extends BaseDriver {
 
 	}
 
-	 @Test(priority=4)
+	@Test(priority = 4)
 	private void weightTracker() {
 		ExtentTest test = reports.createTest("vitals - WeightTracker");
 		test.log(Status.INFO, "WeightTracker starts here...");
 
 		ApolloUtils.verticalScroll(driver);
-		
+
 		// click on vitals
 		String weighvitalBtn = "//*[@id='tab-button-vitals']";
 		WebElement weighvitalBtnElement = driver.findElementByXPath(weighvitalBtn);
@@ -295,25 +325,39 @@ public class ProcessVitalsTab extends BaseDriver {
 		WebElement weightTrackerElement = driver.findElementByXPath(weightTrackerBtn);
 		weightTrackerElement.click();
 
+		// click on your history
+		String historyBtn = "//*[text()='Record your weight']";
+		List<WebElement> btns = driver.findElementsByXPath(historyBtn);
+		if (btns.size() == 1) {
+			btns.get(0).click();
+			weightTrackerPage(test);
+
+		} else {
+			weightTrackerPage(test);
+		}
+
 		test.log(Status.PASS, "Verify click on weight tracker tab");
 
-		// click on record your weight
-		String record = "//*[@id=\"menu-content\"]/app-past-weight-tracker/ion-row/ion-col/ion-button";
-		WebElement recordElement = driver.findElementByXPath(record);
-		recordElement.click();
+		// click on back button
+		driver.navigate().back();
 
+		// click on weight tracker back button
+		driver.navigate().back();
+	}
+
+	private void weightTrackerPage(ExtentTest test) {
 		// click on select date
 		String selectDate = "//*[@id=\"menu-content\"]/app-weight-tracker/ion-content/ion-grid/form/div/ion-row/ion-col[2]/ion-item[1]/ion-datetime";
 		WebElement selectDateElement = driver.findElementByXPath(selectDate);
 		selectDateElement.click();
 
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("weightTrackerDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		// click on month
-		String month = "//button[text()='May']";
+		String month = "//button[text()='" + testdata.get("weightTrackerMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -360,26 +404,19 @@ public class ProcessVitalsTab extends BaseDriver {
 		saveBtnElement.click();
 
 		test.log(Status.PASS, "Verify ckic on save button");
+		//click on your back button
+		driver.navigate().back();
 
-		// click on back button
-		String backbtnweight = "//*[@id=\"menu-content\"]/app-past-weight-tracker/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement backbtnweightElement = driver.findElementByXPath(backbtnweight);
-		backbtnweightElement.click();
-
-		//click on weight tracker back button
-		String weightback="//*[@id=\"menu-content\"]/app-weight-tracker/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement weightbackElement = driver.findElementByXPath(weightback);
-		weightbackElement.click();
 	}
 
-	@Test(priority=5)
+	@Test(priority = 5)
 	private void trackMyActivity() {
 
 		ExtentTest test = reports.createTest("vitals - TrackMyActivity");
 		test.log(Status.INFO, "TrackMyActivity starts here...");
 
 		ApolloUtils.verticalScroll(driver);
-		
+
 		// click on menu button
 		String t_vitalBtn = "//*[@id='tab-button-vitals']";
 		WebElement t_vitalBtnElement = driver.findElementByXPath(t_vitalBtn);
@@ -392,13 +429,35 @@ public class ProcessVitalsTab extends BaseDriver {
 		WebElement trackBtnElement = driver.findElementByXPath(track);
 		trackBtnElement.click();
 
+		// click on your history
+		String historyBtn = "//*[text()='Add new Activity']";
+		List<WebElement> btn = driver.findElementsByXPath(historyBtn);
+		if (btn.size() == 1) {
+			btn.get(0).click();
+			trackactivityPage(test);
+		} else {
+			trackactivityPage(test);
+		}
 		test.log(Status.PASS, "Verify click on track my Activity");
 
-		// click on Add new activity
-		String newactivity = "//*[@id=\"menu-content\"]/app-past-activity/ion-row/ion-col/ion-button";
-		WebElement newactivityElement = driver.findElementByXPath(newactivity);
-		newactivityElement.click();
+		// click on track my activity back button
+	//	driver.navigate().back();
+	//	driver.navigate().back();
+		
+		//click on history page back button
+		String pastactivityBtn="//*[@id=\"menu-content\"]/app-past-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
+		WebElement pastactivityBtnElement = driver.findElementByXPath(pastactivityBtn);
+		pastactivityBtnElement.click();
+		
+		//click on form page back button
+		String trackactivityBtn="//*[@id=\"menu-content\"]/app-track-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
+		WebElement trackactivityBtnElement = driver.findElementByXPath(trackactivityBtn);
+		trackactivityBtnElement.click();
+		
+		
+	}
 
+	private void trackactivityPage(ExtentTest test) {
 		// click on date button
 		String d_date = "//*[@id=\"menu-content\"]/app-track-activity/ion-content/ion-grid/form/div/ion-row/ion-col[2]/ion-item[1]/ion-datetime";
 		driver.findElement(By.xpath(d_date)).click();
@@ -406,14 +465,14 @@ public class ProcessVitalsTab extends BaseDriver {
 		test.log(Status.PASS, "Verify click on date button");
 
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("trackMyActivityDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String month = "//button[text()='May']";
+		String month = "//button[text()='" + testdata.get("trackMyActivityMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -441,14 +500,14 @@ public class ProcessVitalsTab extends BaseDriver {
 		test.log(Status.PASS, "Verify click on time button");
 
 		// click on done button time
-		String clicktrackcat_DoneBtn = "//div//button[text()='Done']";
+		String clicktrackcat_DoneBtn = "//*[text()='Done']";
 		driver.findElement(By.xpath(clicktrackcat_DoneBtn)).click();
 
 		test.log(Status.PASS, "Verify click on done button for time");
 
 		// click on activity
-		String addActivitys = "#menu-content > app-track-activity > ion-content > ion-grid > form > div > ion-row > ion-col:nth-child(2) > ion-item.ion-flex.ion-align-items-end.margin--b30.no-ripple.item.md.ion-activatable.ion-focusable.ion-untouched.ion-pristine.ion-invalid.hydrated.item-interactive.item-select.item-has-placeholder > ion-select";
-		WebElement addActivitysElement = driver.findElement(MobileBy.cssSelector(addActivitys));
+		String addActivitys = "//*[@id=\"menu-content\"]/app-track-activity/ion-content/ion-grid/form/div/ion-row/ion-col[2]/ion-item[3]/ion-select";
+		WebElement addActivitysElement = driver.findElementByXPath(addActivitys);
 		addActivitysElement.click();
 
 		test.log(Status.PASS, "Verify click on Activity");
@@ -482,17 +541,7 @@ public class ProcessVitalsTab extends BaseDriver {
 		saveBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on save button for activity");
-		
-		//click on your activity history
-		String activityback="//*[@id=\"menu-content\"]/app-past-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement activitybackElement = driver.findElementByXPath(activityback);
-		activitybackElement.click();
-		
-		//click on track my activity back button
-		String trackactivityback="//*[@id=\"menu-content\"]/app-track-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement trackactivitybackElement = driver.findElementByXPath(trackactivityback);
-		trackactivitybackElement.click();
-		
+
 	}
 
 }

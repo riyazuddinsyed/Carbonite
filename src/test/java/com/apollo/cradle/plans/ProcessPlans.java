@@ -2,6 +2,7 @@ package com.apollo.cradle.plans;
 
 import java.awt.Scrollbar;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ import org.testng.annotations.Test;
 public class ProcessPlans extends BaseDriver {
 
 	@Test
-	public void mainMenu() throws InterruptedException {
+	public void plans() {
 		ExtentTest test = reports.createTest("Plans");
 		test.log(Status.INFO, " Plans starts here...");
 
@@ -54,12 +55,12 @@ public class ProcessPlans extends BaseDriver {
 		dateElement.click();
 
 		// click on day
-		String days = "//button[text()='29']";
+		String days = "//button[text()='"+testdata.get("plansDay")+"']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		// click on month
-		String month = "//button[text()='Jun']";
+		String month = "//button[text()='"+testdata.get("plansMonth")+"']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -74,9 +75,8 @@ public class ProcessPlans extends BaseDriver {
 		doneBtnElement.click();
 
 		//click on Activity time
-		String activitytime="//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-item[3]/ion-datetime";
-		WebElement activitytimeElement = driver.findElementByXPath(activitytime);
-		activitytimeElement.click();
+		driver.findElement(By.xpath("//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-item[3]/ion-datetime")).click();
+		
 		
 		//click on Done button
 		String timedone="//*[text()='Done']";
@@ -88,15 +88,12 @@ public class ProcessPlans extends BaseDriver {
 		WebElement activitynameElement = driver.findElementByXPath(activityname);
 		activitynameElement.sendKeys("walking");
 		
+		ApolloUtils.verticalScroll(driver);
 		
-		
-		
-		
-		// click on back button
-		String back = "//*[@id=\"menu-content\"]/app-add-care-plan/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement backElement = driver.findElementByXPath(back);
-		backElement.click();
-		
+		//click on save button
+		String saveBtn="//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-row[4]/ion-col/ion-button";
+		WebElement saveBtnElement = driver.findElementByXPath(saveBtn);
+		saveBtnElement.click();
 		
 	}
 }

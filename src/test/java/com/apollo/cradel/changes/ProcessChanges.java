@@ -10,22 +10,22 @@ import com.aventstack.extentreports.Status;
 
 public class ProcessChanges extends BaseDriver {
 
-	 @Test(priority=1)
-	public void ProcessChanges() {
+	@Test(priority = 1)
+	public void PlanningtoStartFamily() {
 		ExtentTest test = reports.createTest("Changes - Planning to Start Family");
 		test.log(Status.INFO, "   Planning to Start Family starts here...");
 
 		// click on main menu button
-		String main = "//*[@id='menuButton']";
-		WebElement mainElement = driver.findElementByXPath(main);
-		mainElement.click();
+		String pmain = "//*[@id=\"menuButton\"]";
+		WebElement pmainElement = driver.findElementByXPath(pmain);
+		pmainElement.click();
 
 		test.log(Status.PASS, "Verify on main menu button");
 
-		// click on Myprofile
-		String profile = "//ion-label[text()='My Profile']";
-		WebElement profileElement = driver.findElementByXPath(profile);
-		profileElement.click();
+		// click on My profile
+		String pprofile = "//ion-label[text()='My Profile']";
+		WebElement pprofileElement = driver.findElementByXPath(pprofile);
+		pprofileElement.click();
 
 		test.log(Status.PASS, "Verify on Myprofile tab");
 
@@ -44,27 +44,26 @@ public class ProcessChanges extends BaseDriver {
 		test.log(Status.PASS, "Verify click on planning to start family");
 
 		// click on Natural Conception
-
 		driver.findElementByXPath("//*[text()='Natural Conception']").click();
 
 		test.log(Status.PASS, "Verify  click on Natural Conception");
 
 		// click on first period date
-		String firstperiod = "//*[@id=\"menu-content\"]/app-planning-family-phase/ion-content/ion-grid/ion-row[3]/ion-col/app-accordion[1]/ion-card/ion-card-content/ion-row/ion-col/app-accordion-body/form/ion-row[1]/ion-col/ion-item";
+		String firstperiod = "//*[@id=\"menu-content\"]/app-planning-family-phase/ion-content/ion-grid/ion-row[3]/ion-col/app-accordion[1]/ion-card/ion-card-content/ion-row/ion-col/app-accordion-body/form/ion-row[1]/ion-col/ion-item/ion-datetime";
 		WebElement firstperiodElement = driver.findElementByXPath(firstperiod);
 		firstperiodElement.click();
 
 		test.log(Status.PASS, "Verify click on first period date");
 
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("startfamilyDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String month = "//button[text()='May']";
+		String month = "//button[text()='" + testdata.get("startfamilyMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -92,22 +91,22 @@ public class ProcessChanges extends BaseDriver {
 		test.log(Status.PASS, "Verify click on save details ");
 	}
 
-	 @Test(priority=2)
+	 @Test(priority = 2)
 	public void iamPregnant() {
 		ExtentTest test = reports.createTest("Changes - IamPregnant");
 		test.log(Status.INFO, " IamPregnant starts here...");
 
 		// click on main menu button
-		String main = "//*[@id='menuButton']";
-		WebElement mainElement = driver.findElementByXPath(main);
-		mainElement.click();
+		String ipmain = "//*[@id=\"menuButton\"]";
+		WebElement ipmainElement = driver.findElementByXPath(ipmain);
+		ipmainElement.click();
 
 		test.log(Status.PASS, "Verify on main menu button");
 
-		// click on Myprofile
-		String profile = "//ion-label[text()='My Profile']";
-		WebElement profileElement = driver.findElementByXPath(profile);
-		profileElement.click();
+		// click on My profile
+		String ipprofile = "//ion-label[text()='My Profile']";
+		WebElement ipprofileElement = driver.findElementByXPath(ipprofile);
+		ipprofileElement.click();
 
 		test.log(Status.PASS, "Verify on Myprofile tab");
 
@@ -126,7 +125,7 @@ public class ProcessChanges extends BaseDriver {
 		test.log(Status.PASS, "Verify click on iam pregnant");
 
 		// click on Conceived Naturally
-		String ConceivedNaturally = "//*[text()='Conceived Naturally']";
+		String ConceivedNaturally = "//*[@id=\"menu-content\"]/app-pregnant-phase/ion-content/ion-grid/ion-row[3]/ion-col/app-accordion[1]/ion-card/ion-card-header/ion-list/ion-item";
 		WebElement ConceivedNaturallyElement = driver.findElementByXPath(ConceivedNaturally);
 		ConceivedNaturallyElement.click();
 
@@ -138,14 +137,14 @@ public class ProcessChanges extends BaseDriver {
 		lastperiodElement.click();
 
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("iamPregnantDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String month = "//button[text()='Apr']";
+		String month = "//button[text()='" + testdata.get("iamPregnantMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -174,25 +173,24 @@ public class ProcessChanges extends BaseDriver {
 
 	}
 
-	@Test(priority=3)
+	 @Test(priority = 3)
 	public void postDelivery() {
 		ExtentTest test = reports.createTest("Changes - PostDelivery");
 		test.log(Status.INFO, " PostDelivery starts here...");
 
 		// click on main menu button
-		String pmain = "//*[@id='menuButton']";
-		WebElement pmainElement = driver.findElementByXPath(pmain);
-		pmainElement.click();
+		String pdmain = "//*[@id=\"menuButton\"]";
+		WebElement pdmainElement = driver.findElementByXPath(pdmain);
+		pdmainElement.click();
 
 		test.log(Status.PASS, "Verify on main menu button");
 
-		// click on Myprofile
-		String pprofile = "//ion-label[text()='My Profile']";
-		WebElement pprofileElement = driver.findElementByXPath(pprofile);
-		pprofileElement.click();
+		// click on My profile
+		String pdprofile = "//ion-label[text()='My Profile']";
+		WebElement pdprofileElement = driver.findElementByXPath(pdprofile);
+		pdprofileElement.click();
 
 		test.log(Status.PASS, "Verify on Myprofile tab");
-
 		// click on changes
 		String pchanges = "//*[text()='Change']";
 		WebElement pchangesElement = driver.findElementByXPath(pchanges);
@@ -220,14 +218,14 @@ public class ProcessChanges extends BaseDriver {
 		infantbirthElement.click();
 
 		// click on day
-		String days = "//button[text()='19']";
+		String days = "//button[text()='" + testdata.get("postDeliveryDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String month = "//button[text()='Apr']";
+		String month = "//button[text()='" + testdata.get("postDeliveryMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -295,25 +293,24 @@ public class ProcessChanges extends BaseDriver {
 
 	}
 
-	 @Test(priority=4)
+	 @Test(priority = 4)
 	public void raisingChild() {
 		ExtentTest test = reports.createTest("Changes - RaisingChild");
 		test.log(Status.INFO, " RaisingChild starts here...");
 
 		// click on main menu button
-		String pmain = "//*[@id='menuButton']";
-		WebElement pmainElement = driver.findElementByXPath(pmain);
-		pmainElement.click();
+		String rcmain = "//*[@id=\"menuButton\"]";
+		WebElement rcmainElement = driver.findElementByXPath(rcmain);
+		rcmainElement.click();
 
 		test.log(Status.PASS, "Verify on main menu button");
 
-		// click on Myprofile
+		// click on My profile
 		String pprofile = "//ion-label[text()='My Profile']";
 		WebElement pprofileElement = driver.findElementByXPath(pprofile);
 		pprofileElement.click();
 
 		test.log(Status.PASS, "Verify on Myprofile tab");
-
 		// click on changes
 		String pchanges = "//*[text()='Change']";
 		WebElement pchangesElement = driver.findElementByXPath(pchanges);
@@ -341,14 +338,14 @@ public class ProcessChanges extends BaseDriver {
 		childbirthElement.click();
 
 		// click on day
-		String day = "//button[text()='19']";
+		String day = "//button[text()='" + testdata.get("raisingchildDay") + "']";
 		WebElement dayBtnElement = driver.findElementByXPath(day);
 		dayBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String months = "//button[text()='Apr']";
+		String months = "//button[text()='" + testdata.get("raisingchildMonth") + "']";
 		WebElement monthsBtnElement = driver.findElementByXPath(months);
 		monthsBtnElement.click();
 
@@ -405,25 +402,24 @@ public class ProcessChanges extends BaseDriver {
 
 	}
 
-	@Test(priority=5)
+	 @Test(priority = 5)
 	public void planningForNextBaby() {
 		ExtentTest test = reports.createTest("Changes - PlanningForNextBaby");
 		test.log(Status.INFO, " PlanningForNextBaby starts here...");
 
 		// click on main menu button
-		String pmain = "//*[@id='menuButton']";
-		WebElement pmainElement = driver.findElementByXPath(pmain);
-		pmainElement.click();
+		String pnbmain = "//*[@id=\"menuButton\"]";
+		WebElement pnbmainElement = driver.findElementByXPath(pnbmain);
+		pnbmainElement.click();
 
 		test.log(Status.PASS, "Verify on main menu button");
 
-		// click on Myprofile
-		String pprofile = "//ion-label[text()='My Profile']";
-		WebElement pprofileElement = driver.findElementByXPath(pprofile);
-		pprofileElement.click();
+		// click on My profile
+		String pnbprofile = "//ion-label[text()='My Profile']";
+		WebElement pnbprofileElement = driver.findElementByXPath(pnbprofile);
+		pnbprofileElement.click();
 
 		test.log(Status.PASS, "Verify on Myprofile tab");
-
 		// click on changes
 		String pchanges = "//*[text()='Change']";
 		WebElement pchangesElement = driver.findElementByXPath(pchanges);
@@ -444,21 +440,21 @@ public class ProcessChanges extends BaseDriver {
 		lastperiodElement.click();
 
 		test.log(Status.PASS, "Verify click on first day of your last period");
-		
+
 		// click on calendar
 		String calendar = "//*[@id=\"menu-content\"]/app-planning-next-baby-phase/ion-content/ion-grid/ion-row[3]/ion-col/app-accordion/ion-card/ion-card-content/ion-row/ion-col/app-accordion-body/form/ion-row[1]/ion-col/ion-item/ion-datetime";
 		WebElement calendarElement = driver.findElementByXPath(calendar);
 		calendarElement.click();
 
 		// click on day
-		String cday = "//button[text()='19']";
+		String cday = "//button[text()='" + testdata.get("planningForNextBabyDay") + "']";
 		WebElement cdayBtnElement = driver.findElementByXPath(cday);
 		cdayBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String cmonths = "//button[text()='Apr']";
+		String cmonths = "//button[text()='" + testdata.get("planningForNextBabyMonth") + "']";
 		WebElement cmonthsBtnElement = driver.findElementByXPath(cmonths);
 		cmonthsBtnElement.click();
 

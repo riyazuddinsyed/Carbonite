@@ -144,7 +144,7 @@ public class Login extends BaseDriver {
 		driver.findElement(By.xpath(login)).click();
 
 		driver.findElement(By.xpath("//*[text()='Mobile Number']//following::input[1]")).clear();
-		driver.findElement(By.xpath("//*[text()='Mobile Number']//following::input[1]")).sendKeys("9177119462");
+		driver.findElement(By.xpath("//*[text()='Mobile Number']//following::input[1]")).sendKeys(testdata.get("mobileNo"));
 		
 		// Click on get otp button
 		String validotpBtn = "//*[text()='Get OTP ']";
@@ -153,7 +153,7 @@ public class Login extends BaseDriver {
 
 		String numbermsgs = "//*[@id=\"menu-content\"]/app-enter-otp/ion-content/form/ion-grid/ion-row/ion-col[3]/ion-row[1]/ion-col[7]/ion-row/ion-col/ion-input/input";
 		WebElement numbermsgsElement = driver.findElementByXPath(numbermsgs);
-		numbermsgsElement.sendKeys("123456");
+		numbermsgsElement.sendKeys(testdata.get("OTP"));
 
 		test.log(Status.PASS,
 				"Verify that on entering the correct OTP user is automatically navigated to the onboarding floor");

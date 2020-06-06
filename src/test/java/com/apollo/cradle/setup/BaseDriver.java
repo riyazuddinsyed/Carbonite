@@ -1,18 +1,11 @@
 package com.apollo.cradle.setup;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,11 +16,14 @@ import org.testng.annotations.BeforeSuite;
 import com.apollo.cradle.constants.ApolloConstants;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.screenrecording.BaseStartScreenRecordingOptions;
 
 public class BaseDriver {
 
@@ -35,7 +31,8 @@ public class BaseDriver {
 	public static ExtentSparkReporter reporter;
 	public static ExtentReports reports;
 	public static Map<String, String> map;
-	
+	public static Map<String, String> testdata;
+
 	public static AppiumDriver<WebElement> getDriver() {
 		return driver;
 	}
@@ -44,14 +41,16 @@ public class BaseDriver {
 		BaseDriver.driver = driver;
 	}
 
-	/*
-	 * @BeforeSuite private void suiteSetup() { reporter = new
-	 * ExtentSparkReporter("extent.html"); reports = new ExtentReports();
-	 * reports.attachReporter(reporter); }
-	 */
 	@BeforeSuite
 	public void setUp() throws Exception {
 
+		File testdataFile = new File("D:\\Softwares\\testdata.json");
+		ObjectMapper mapper = new ObjectMapper();
+		testdata = mapper.readValue(testdataFile, new TypeReference<Map<String, String>>() {
+		});
+		
+		System.out.println("path:"+System.getProperty("user.dir"));
+		
 		// Report configuration
 		reporter = new ExtentSparkReporter("extent.html");
 		reports = new ExtentReports();
@@ -63,10 +62,12 @@ public class BaseDriver {
 		capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ApolloConstants.PLATFORM_NAME);
 		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, ApolloConstants.DEVICE_NAME);
 		capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-		//capabilities.setCapability(AndroidMobileCapabilityType.AVD, ApolloConstants.DEVICE_NAME);
+		// capabilities.setCapability(AndroidMobileCapabilityType.AVD,
+		// ApolloConstants.DEVICE_NAME);
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, ApolloConstants.APP_PACKAGE);
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, ApolloConstants.APP_ACTIVITY);
-		//capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ApolloConstants.AUTOMATION_NAME);
+		// capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME,
+		// ApolloConstants.AUTOMATION_NAME);
 		capabilities.setCapability(AndroidMobileCapabilityType.CHROMEDRIVER_EXECUTABLE, ApolloConstants.CHROME_DRIVER);
 		capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
 		capabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
@@ -74,9 +75,17 @@ public class BaseDriver {
 
 		// Connection Appium
 		driver = new AndroidDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-		driver.context("WEBVIEW_com.apollocradle.apollocradle");
-
+		
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		System.out.println(driver.getContext());
+		File file = driver.getScreenshotAs(OutputType.FILE);
+		System.out.println(file.getAbsolutePath());
+
+		//System.out.println()
+		driver.context("WEBVIEW_com.apollocradle.apollocradle");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		//File file = driver.getScreenshotAs(OutputType.FILE);
+		//System.out.println(file.getAbsolutePath());
 	}
 
 	@AfterSuite
@@ -127,26 +136,5 @@ public class BaseDriver {
 		String txt = null;
 		txt = getAttribute(e, "text");
 		return txt;
-	}
-
-	/*
-	 * @AfterSuite private void suiteTeardown() { reports.flush(); }
-	 */
-
-	public void readTestdata() throws InvalidFormatException, IOException {
-
-		map = new HashMap<String, String>();
-		String pathname = "D:\\testdata.xlsx";
-		File file = new File(pathname);
-
-		Workbook workbook = new XSSFWorkbook(file);
-		Sheet firstSheet = workbook.getSheetAt(0);
-		Iterator<Row> iterator = firstSheet.iterator();
-
-		while (iterator.hasNext()) {
-			Row nextRow = iterator.next();
-			map.put(nextRow.getCell(0).getStringCellValue(), nextRow.getCell(1).getStringCellValue());
-		}
-		workbook.close();
 	}
 }
