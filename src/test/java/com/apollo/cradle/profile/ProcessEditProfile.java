@@ -196,26 +196,27 @@ public class ProcessEditProfile extends BaseDriver {
 		// driver.findElement(By.xpath("//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[3]")).click();
 
 		// Click on check box selector
-		String oldMedicalCondition = "//*[text()='"+testdata.get("oldMedicalCondition")+"']";		
+		String oldMedicalCondition = "//*[text()='" + testdata.get("oldMedicalCondition") + "']";
 		WebElement oldMedicalConditionElement = driver.findElementByXPath(oldMedicalCondition);
 		oldMedicalConditionElement.click();
-		
-		String newMedicalCondition = "//*[text()='"+testdata.get("newMedicalCondition")+"']";		
+
+		String newMedicalCondition = "//*[text()='" + testdata.get("newMedicalCondition") + "']";
 		WebElement newMedicalConditionElement = driver.findElementByXPath(newMedicalCondition);
 		newMedicalConditionElement.click();
-		
+
 		// Click on update Button
 		String familyupdateBtn = "//ion-button[text()='Update ']";
 		WebElement familyupdateBtnElement = driver.findElementByXPath(familyupdateBtn);
 		familyupdateBtnElement.click();
-		
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		WebElement Element = driver.findElement(By.xpath("//*[@id=\"menu-content\"]/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[4]"));
+		WebElement Element = driver.findElement(By.xpath(
+				"//*[@id=\"menu-content\"]/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[4]"));
 
 		js.executeScript("arguments[0].scrollIntoView();", Element);
-		System.out.println("==="+driver.getContext());
-		
+		System.out.println("===" + driver.getContext());
+
 	}
 
 	@Test(priority = 3)
@@ -227,35 +228,49 @@ public class ProcessEditProfile extends BaseDriver {
 		String pregnancyslides = "//*[@id=\"menu-content\"]/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[4]";
 		WebElement pregnancyslidesElements = driver.findElementByXPath(pregnancyslides);
 		pregnancyslidesElements.click();
-		
-		//Select Birth Outcome
+
+		// Select Birth Outcome
 		String birthOutcomeXPath = "//*[@id='menu-content']/app-add-pregnancy-history/ion-content/ion-grid/form/ion-row[1]/ion-col/ion-item[1]/ion-select";
 		List<WebElement> birthOutcomeElements = driver.findElementsByXPath(birthOutcomeXPath);
-		if(birthOutcomeElements.size()==1)
+		if (birthOutcomeElements.size() == 1)
 			addPregnancyHistory();
 		else
 			viewPregnancyHistory();
-		
-		//click on profile back button
-		/*String profilebackBtn="//*[@id=\"menu-content\"]/app-profile/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
-		WebElement profilebackBtnElement = driver.findElementByXPath(profilebackBtn);
-		profilebackBtnElement.click();
-		*/
-		driver.navigate().back();  
-		driver.navigate().back();
-		driver.navigate().back();
+
 	}
-	
+
 	private void viewPregnancyHistory() {
 		// click on add more pregnancy history
-		String  addPregnancyHistoryBtnXPath= "//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[2]/div/app-pregnancy-history/ion-row[2]/ion-col[2]/ion-button";
-		WebElement addPregnancyHistoryBtnElement = driver.findElementByXPath(addPregnancyHistoryBtnXPath);		
+		String addPregnancyHistoryBtnXPath = "//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[2]/div/app-pregnancy-history/ion-row[2]/ion-col[2]/ion-button";
+		WebElement addPregnancyHistoryBtnElement = driver.findElementByXPath(addPregnancyHistoryBtnXPath);
 
 		while (!addPregnancyHistoryBtnElement.isDisplayed()) {
-			ApolloUtils.verticalScroll(driver);			
+			ApolloUtils.verticalScroll(driver);
+		}
+		try {
+			Thread.sleep(20);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		addPregnancyHistoryBtnElement.click();
 		addPregnancyHistory();
+
+		String pregnancyHistoryPageBackBtnXPath = "//*[@id='menu-content']/app-profile-edit/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement pregnancyHistoryPageBackBtn = driver.findElementByXPath(pregnancyHistoryPageBackBtnXPath);
+		pregnancyHistoryPageBackBtn.click();
+		
+		String addPpregnancyHistoryPageBackBtnXPath = "//*[@id=\"menu-content\"]/app-add-pregnancy-history/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement addPpregnancyHistoryPageBackBtn = driver.findElementByXPath(addPpregnancyHistoryPageBackBtnXPath);
+		addPpregnancyHistoryPageBackBtn.click();
+		
+		String editProfilePageBackBtnXPath = "//*[@id=\"menu-content\"]/app-profile-edit/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement editProfilePageBackBtn = driver.findElementByXPath(editProfilePageBackBtnXPath);
+		editProfilePageBackBtn.click();
+		
+		String profilePageBackBtnXPath = "//*[@id=\"menu-content\"]/app-profile/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement profilePageBackBtn = driver.findElementByXPath(profilePageBackBtnXPath);
+		profilePageBackBtn.click();
 	}
 
 	public void addPregnancyHistory() {
@@ -327,24 +342,10 @@ public class ProcessEditProfile extends BaseDriver {
 		commentsElemet.sendKeys("good healty");
 
 		ApolloUtils.verticalScroll(driver);
-		
 
 		// Click on Add history
 		String addHistory = "//*[text()='Add History ']";
 		WebElement addHistoryElement = driver.findElementByXPath(addHistory);
 		addHistoryElement.click();
-		
-		
-		//click on back button
-		String backBtn="//*[@id=\"menu-content\"]/app-profile-edit/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
-		WebElement backBtnElement= driver.findElementByXPath(backBtn);
-		backBtnElement.click();
-		
-		
-		//click on add pregnant history button
-		String addBtn="//*[@id=\"menu-content\"]/app-add-pregnancy-history/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement addBtnElement = driver.findElementByXPath(addBtn);
-		addBtnElement.click();
-
 	}
 }
