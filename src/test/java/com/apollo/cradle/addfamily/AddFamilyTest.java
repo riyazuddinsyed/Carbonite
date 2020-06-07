@@ -1,6 +1,7 @@
 package com.apollo.cradle.addfamily;
 
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.apollo.cradle.setup.BaseDriver;
@@ -8,94 +9,28 @@ import com.apollo.cradle.util.ApolloUtils;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-public class ProcessAddFamily extends BaseDriver {
-
-	 @Test(priority=1)
-	public void PlanningtoStartFamily() {
-		ExtentTest test = reports.createTest("AddFamily - Planning to Start Family");
-		test.log(Status.INFO, "   Planning to Start Family starts here...");
-
+public class AddFamilyTest extends BaseDriver {
+	
+	@BeforeClass
+	public void navigateToAddFamilyPage() {
 		// click on main menu button
 		String pmain = "//ion-menu-button[@id='menuButton']";
 		WebElement pmainElement = driver.findElementByXPath(pmain);
 		pmainElement.click();
-
-		test.log(Status.PASS, "Verify on main menu button");
 
 		// click on My profile
 		String pprofile = "//*[text()='My Profile']";
 		WebElement pprofileElement = driver.findElementByXPath(pprofile);
 		pprofileElement.click();
 
-		test.log(Status.PASS, "Verify on Myprofile tab");
+	}
 
-		// click on plus symbol
-		String plus = "//*[@id=\"menu-content\"]/app-profile/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-row/ion-col[2]/ion-button";
-		WebElement plusElement = driver.findElementByXPath(plus);
-		plusElement.click();
+	@Test(priority = 1)
+	public void startFamilyTest() {
+		ExtentTest test = reports.createTest("AddFamily - Planning to Start Family");
+		test.log(Status.INFO, "   Planning to Start Family starts here...");
 
-		test.log(Status.PASS, "Verify click on plus symbol");
-
-		// click on select location
-		//*[@id="storeProfileInfo"]/ion-row[1]/ion-col/ion-item/ion-select
-		String location = "//*[@id=\"storeProfileInfo\"]/ion-row[1]/ion-col/ion-item/ion-select";
-		WebElement locationElement = driver.findElementByXPath(location);
-		locationElement.click();
-
-		// select on location radio button location
-		String radioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement radioBtnElement = driver.findElementByXPath(radioBtn);
-		radioBtnElement.click();
-
-		// click on ok button
-		String okBtn = "//*[text()='OK']";
-		WebElement okBtnElement = driver.findElementByXPath(okBtn);
-		okBtnElement.click();
-
-		// select on branch
-		String branch = "//*[@id='secondSelecet']";
-		WebElement branchElement = driver.findElementByXPath(branch);
-		branchElement.click();
-
-		// select on location radio button location
-		String branchradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement branchradioBtnElement = driver.findElementByXPath(branchradioBtn);
-		branchradioBtnElement.click();
-
-		// click on ok button
-		String branchokBtn = "//*[text()='OK']";
-		WebElement branchokBtnElement = driver.findElementByXPath(branchokBtn);
-		branchokBtnElement.click();
-
-		// enter the name
-		String name = "//*[@id=\"storeProfileInfo\"]/ion-row[3]/ion-col/ion-item/ion-input/input";
-		WebElement nameElement = driver.findElementByXPath(name);
-		nameElement.sendKeys("reddy");
-
-		// select your are gender
-		String gender = "//span[text()='Male']";
-		WebElement genderElement = driver.findElementByXPath(gender);
-		genderElement.click();
-
-		// Enter your date of birth
-		String dofbirth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement dofbirthElement = driver.findElementByXPath(dofbirth);
-		dofbirthElement.click();
-		dofbirthElement.sendKeys("26");
-
-		// Enter your month
-		String month = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement monthElement = driver.findElementByXPath(month);
-		monthElement.click();
-		monthElement.sendKeys("02");
-
-		// Enter your year
-		String year = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[3]/ion-item/ion-input/input";
-		WebElement yearElement = driver.findElementByXPath(year);
-		yearElement.click();
-		yearElement.sendKeys("1996");
-
-		ApolloUtils.verticalScroll(driver);
+		addFamilyMemberForm(testdata.get("startFamilyMemberName"));
 
 		// Select on phases
 		String phases = "//span[text()='Planning to Start Family']";
@@ -105,7 +40,6 @@ public class ProcessAddFamily extends BaseDriver {
 		test.log(Status.PASS, "Verify click on planning to start family");
 
 		// click on Natural Conception
-
 		driver.findElementByXPath("//*[text()='Natural Conception']").click();
 
 		test.log(Status.PASS, "Verify  click on Natural Conception");
@@ -118,14 +52,14 @@ public class ProcessAddFamily extends BaseDriver {
 		test.log(Status.PASS, "Verify click on first period date");
 
 		// click on day
-		String days = "//button[text()='"+testdata.get("PlanningStartFamilyDay")+"']";
+		String days = "//button[text()='" + testdata.get("PlanningStartFamilyDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String months = "//button[text()='"+testdata.get("PlanningStartFamilyMonth")+"']";
+		String months = "//button[text()='" + testdata.get("PlanningStartFamilyMonth") + "']";
 		WebElement monthsBtnElement = driver.findElementByXPath(months);
 		monthsBtnElement.click();
 
@@ -154,89 +88,12 @@ public class ProcessAddFamily extends BaseDriver {
 
 	}
 
-	 @Test(priority=2)
+	@Test(priority = 2)
 	public void iamPregnant() {
 		ExtentTest test = reports.createTest("AddFamily - I am Pregnant");
 		test.log(Status.INFO, " I am Pregnant starts here...");
 
-		/*
-		 * // click on main menu button String imain = "//*[@id=\"menuButton\"]";
-		 * WebElement imainElement = driver.findElementByXPath(imain);
-		 * imainElement.click();
-		 * 
-		 * test.log(Status.PASS, "Verify on main menu button");
-		 * 
-		 * // click on My profile String iprofile = "//ion-label[text()='My Profile']";
-		 * WebElement iprofileElement = driver.findElementByXPath(iprofile);
-		 * iprofileElement.click();
-		 * 
-		 * test.log(Status.PASS, "Verify on Myprofile tab");
-		 */
-		// click on plus symbol
-		String iplus = "//*[@id=\"menu-content\"]/app-profile/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-row/ion-col[2]/ion-button";
-		WebElement iplusElement = driver.findElementByXPath(iplus);
-		iplusElement.click();
-		test.log(Status.PASS, "Verify click on plus symbol");
-
-		// click on select location
-		String slocation = "//*[@id=\"storeProfileInfo\"]/ion-row[1]/ion-col/ion-item/ion-select";
-		WebElement slocationElement = driver.findElementByXPath(slocation);
-		slocationElement.click();
-
-		// select on location radio button location
-		String lradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement lradioBtnElement = driver.findElementByXPath(lradioBtn);
-		lradioBtnElement.click();
-
-		// click on ok button
-		String cokBtn = "//*[text()='OK']";
-		WebElement cokBtnElement = driver.findElementByXPath(cokBtn);
-		cokBtnElement.click();
-
-		// select on branch
-		String sbranch = "//*[@id='secondSelecet']";
-		WebElement sbranchElement = driver.findElementByXPath(sbranch);
-		sbranchElement.click();
-
-		// select on location radio button location
-		String sbranchradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement sbranchradioBtnElement = driver.findElementByXPath(sbranchradioBtn);
-		sbranchradioBtnElement.click();
-
-		// click on ok button
-		String cbranchokBtn = "//*[text()='OK']";
-		WebElement cbranchokBtnElement = driver.findElementByXPath(cbranchokBtn);
-		cbranchokBtnElement.click();
-
-		// enter the name
-		String diname = "//ion-label[text()='Name']";
-		WebElement dinameElement = driver.findElementByXPath(diname);
-		dinameElement.sendKeys("madhu");
-		// driver.findElement(By.xpath("//*[text()='Name']")).sendKeys("madhureddy");
-
-		// select your are gender
-		String sgender = "//span[text()='Male']";
-		WebElement sgenderElement = driver.findElementByXPath(sgender);
-		sgenderElement.click();
-
-		// Enter your date of birth
-		String edofbirth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement edofbirthElement = driver.findElementByXPath(edofbirth);
-		edofbirthElement.click();
-		edofbirthElement.sendKeys("14");
-
-		// Enter your month
-		String emonth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement emonthElement = driver.findElementByXPath(emonth);
-		emonthElement.click();
-		emonthElement.sendKeys("02");
-
-		// Enter your year
-		String eyear = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[3]/ion-item/ion-input/input";
-		WebElement eyearElement = driver.findElementByXPath(eyear);
-		eyearElement.click();
-		eyearElement.sendKeys("1996");
-		ApolloUtils.verticalScroll(driver);
+		addFamilyMemberForm(testdata.get("pregnantMemberName"));
 
 		// click on iam pregnant
 		String pregnant = "//span[text()='I am ' or text()=' Pregnant']";
@@ -258,14 +115,14 @@ public class ProcessAddFamily extends BaseDriver {
 		lastperiodElement.click();
 
 		// click on day
-		String days = "//button[text()='"+testdata.get("PregnantDay")+"']";
+		String days = "//button[text()='" + testdata.get("PregnantDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String month = "//button[text()='"+testdata.get("PregnantMonth")+"']";
+		String month = "//button[text()='" + testdata.get("PregnantMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -294,102 +151,12 @@ public class ProcessAddFamily extends BaseDriver {
 
 	}
 
-	 @Test(priority=3)
+	@Test(priority = 3)
 	public void postDelivery() {
 		ExtentTest test = reports.createTest("AddFamily - postDelivery");
 		test.log(Status.INFO, " postDelivery starts here...");
 
-		/*
-		 * // click on main menu button String postmain = "//*[@id=\"menuButton\"]";
-		 * WebElement postmainmainElement = driver.findElementByXPath(postmain);
-		 * postmainmainElement.click();
-		 * 
-		 * test.log(Status.PASS, "Verify on main menu button");
-		 * 
-		 * // click on My profile String postprofile =
-		 * "//ion-label[text()='My Profile']"; WebElement postprofileElement =
-		 * driver.findElementByXPath(postprofile); postprofileElement.click();
-		 * 
-		 * test.log(Status.PASS, "Verify on Myprofile tab");
-		 */
-		// click on plus symbol
-		String dplus = "//*[@id=\"menu-content\"]/app-profile/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-row/ion-col[2]/ion-button";
-		WebElement dplusElement = driver.findElementByXPath(dplus);
-		dplusElement.click();
-
-		test.log(Status.PASS, "Verify click on plus symbol");
-
-		// click on select location
-		String dlocation = "//*[@id=\"storeProfileInfo\"]/ion-row[1]/ion-col/ion-item/ion-select";
-		WebElement dlocationElement = driver.findElementByXPath(dlocation);
-		dlocationElement.click();
-
-		test.log(Status.PASS, "Verify click on select location");
-
-		// select on location radio button location
-		String dradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement dradioBtnElement = driver.findElementByXPath(dradioBtn);
-		dradioBtnElement.click();
-
-		// click on ok button
-		String dokBtn = "//*[text()='OK']";
-		WebElement dokBtnElement = driver.findElementByXPath(dokBtn);
-		dokBtnElement.click();
-
-		test.log(Status.PASS, "Verify click on select location");
-
-		// select on branch
-		String dbranch = "//*[@id='secondSelecet']";
-		WebElement dbranchElement = driver.findElementByXPath(dbranch);
-		dbranchElement.click();
-
-		// select on location radio button location
-		String dbranchradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement dbranchradioBtnElement = driver.findElementByXPath(dbranchradioBtn);
-		dbranchradioBtnElement.click();
-
-		// click on ok button
-		String bbranchokBtn = "//*[text()='OK']";
-		WebElement bbranchokBtnElement = driver.findElementByXPath(bbranchokBtn);
-		bbranchokBtnElement.click();
-
-		test.log(Status.PASS, "Verify select on branch");
-
-		// enter the name
-		String dname = "//*[@id=\"storeProfileInfo\"]/ion-row[3]/ion-col/ion-item/ion-input/input";
-		WebElement dnameElement = driver.findElementByXPath(dname);
-		dnameElement.sendKeys("madhu");
-
-		test.log(Status.PASS, "Verify enter the name");
-
-		// select your are gender
-		String ggender = "//span[text()='Male']";
-		WebElement ggenderElement = driver.findElementByXPath(ggender);
-		ggenderElement.click();
-
-		test.log(Status.PASS, "Verify select your are gender");
-
-		// Enter your date of birth
-		String ydofbirth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement ydofbirthElement = driver.findElementByXPath(ydofbirth);
-		ydofbirthElement.click();
-		ydofbirthElement.sendKeys("27");
-
-		// Enter your month
-		String ymonth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement ymonthElement = driver.findElementByXPath(ymonth);
-		ymonthElement.click();
-		ymonthElement.sendKeys("02");
-
-		// Enter your year
-		String yyear = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[3]/ion-item/ion-input/input";
-		WebElement yyearElement = driver.findElementByXPath(yyear);
-		yyearElement.click();
-		yyearElement.sendKeys("1996");
-
-		test.log(Status.PASS, "Verify Enter your date of birth");
-
-		ApolloUtils.verticalScroll(driver);
+		addFamilyMemberForm(testdata.get("postDeliveryMemberName"));
 		ApolloUtils.verticalScroll(driver);
 
 		// click on Post Delivery
@@ -412,14 +179,14 @@ public class ProcessAddFamily extends BaseDriver {
 		infantbirthElement.click();
 
 		// click on day
-		String days = "//button[text()='"+testdata.get("postDeliveryDays")+"']";
+		String days = "//button[text()='" + testdata.get("postDeliveryDays") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String month = "//button[text()='"+testdata.get("postDeliveryMonths")+"']";
+		String month = "//button[text()='" + testdata.get("postDeliveryMonths") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -487,89 +254,12 @@ public class ProcessAddFamily extends BaseDriver {
 
 	}
 
-	 @Test(priority=4)
+	@Test(priority = 4)
 	public void raisingChild() {
 		ExtentTest test = reports.createTest("AddFamily - RaisingChild");
 		test.log(Status.INFO, " RaisingChild starts here...");
 
-		// click on plus symbol
-		String rplus = "//*[@id=\"menu-content\"]/app-profile/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-row/ion-col[2]/ion-button";
-		WebElement rplusElement = driver.findElementByXPath(rplus);
-		rplusElement.click();
-
-		test.log(Status.PASS, "Verify click on plus symbol");
-
-		// click on select location
-		String rlocation = "//*[@id=\"storeProfileInfo\"]/ion-row[1]/ion-col/ion-item/ion-select";
-		WebElement rlocationElement = driver.findElementByXPath(rlocation);
-		rlocationElement.click();
-
-		test.log(Status.PASS, "Verify click on select location");
-
-		// select on location radio button location
-		String rradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement rradioBtnElement = driver.findElementByXPath(rradioBtn);
-		rradioBtnElement.click();
-
-		// click on ok button
-		String rokBtn = "//*[text()='OK']";
-		WebElement rokBtnElement = driver.findElementByXPath(rokBtn);
-		rokBtnElement.click();
-
-		test.log(Status.PASS, "Verify click on select location");
-
-		// select on branch
-		String rbranch = "//*[@id='secondSelecet']";
-		WebElement rbranchElement = driver.findElementByXPath(rbranch);
-		rbranchElement.click();
-
-		// select on location radio button location
-		String rbranchradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement rbranchradioBtnElement = driver.findElementByXPath(rbranchradioBtn);
-		rbranchradioBtnElement.click();
-
-		// click on ok button
-		String rbranchokBtn = "//*[text()='OK']";
-		WebElement rbranchokBtnElement = driver.findElementByXPath(rbranchokBtn);
-		rbranchokBtnElement.click();
-
-		test.log(Status.PASS, "Verify select on branch");
-
-		// enter the name
-		String rname = "//*[@id=\"storeProfileInfo\"]/ion-row[3]/ion-col/ion-item/ion-input/input";
-		WebElement rnameElement = driver.findElementByXPath(rname);
-		rnameElement.sendKeys("madhukumar");
-
-		test.log(Status.PASS, "Verify enter the name");
-
-		// select your are gender
-		String rgender = "//span[text()='Male']";
-		WebElement rgenderElement = driver.findElementByXPath(rgender);
-		rgenderElement.click();
-
-		test.log(Status.PASS, "Verify select your are gender");
-
-		// Enter your date of birth
-		String rdofbirth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement rdofbirthElement = driver.findElementByXPath(rdofbirth);
-		rdofbirthElement.click();
-		rdofbirthElement.sendKeys("14");
-
-		// Enter your month
-		String rmonth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement rmonthElement = driver.findElementByXPath(rmonth);
-		rmonthElement.click();
-		rmonthElement.sendKeys("02");
-
-		// Enter your year
-		String ryear = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[3]/ion-item/ion-input/input";
-		WebElement ryearElement = driver.findElementByXPath(ryear);
-		ryearElement.click();
-		ryearElement.sendKeys("1996");
-
-		test.log(Status.PASS, "Verify Enter your date of birth");
-
-		ApolloUtils.verticalScroll(driver);
+		addFamilyMemberForm(testdata.get("raisingChildMemberName"));
 		ApolloUtils.verticalScroll(driver);
 
 		// click on Raising a child
@@ -592,14 +282,14 @@ public class ProcessAddFamily extends BaseDriver {
 		childbirthElement.click();
 
 		// click on day
-		String day = "//button[text()='"+testdata.get("RaisingChildDay")+"']";
+		String day = "//button[text()='" + testdata.get("RaisingChildDay") + "']";
 		WebElement dayBtnElement = driver.findElementByXPath(day);
 		dayBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String months = "//button[text()='"+testdata.get("RaisingChildMonth")+"']";
+		String months = "//button[text()='" + testdata.get("RaisingChildMonth") + "']";
 		WebElement monthsBtnElement = driver.findElementByXPath(months);
 		monthsBtnElement.click();
 
@@ -655,89 +345,13 @@ public class ProcessAddFamily extends BaseDriver {
 
 	}
 
-	 @Test(priority = 5)
+	@Test(priority = 5)
 	public void planningForNextBaby() {
 		ExtentTest test = reports.createTest("AddFamily - PlanningForNextBaby");
 		test.log(Status.INFO, " PlanningForNextBaby starts here...");
-
-		// click on plus symbol
-		String nplus = "//*[@id=\"menu-content\"]/app-profile/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-row/ion-col[2]/ion-button";
-		WebElement nplusElement = driver.findElementByXPath(nplus);
-		nplusElement.click();
-
-		test.log(Status.PASS, "Verify click on plus symbol");
-
-		// click on select location
-		String nlocation = "//*[@id=\"storeProfileInfo\"]/ion-row[1]/ion-col/ion-item/ion-select";
-		WebElement nlocationElement = driver.findElementByXPath(nlocation);
-		nlocationElement.click();
-
-		test.log(Status.PASS, "Verify click on select location");
-
-		// select on location radio button location
-		String nradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement nradioBtnElement = driver.findElementByXPath(nradioBtn);
-		nradioBtnElement.click();
-
-		// click on ok button
-		String nokBtn = "//*[text()='OK']";
-		WebElement nokBtnElement = driver.findElementByXPath(nokBtn);
-		nokBtnElement.click();
-
-		test.log(Status.PASS, "Verify click on select location");
-
-		// select on branch
-		String nbranch = "//*[@id='secondSelecet']";
-		WebElement nbranchElement = driver.findElementByXPath(nbranch);
-		nbranchElement.click();
-
-		// select on location radio button location
-		String nbranchradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
-		WebElement nbranchradioBtnElement = driver.findElementByXPath(nbranchradioBtn);
-		nbranchradioBtnElement.click();
-
-		// click on ok button
-		String nbranchokBtn = "//*[text()='OK']";
-		WebElement nbranchokBtnElement = driver.findElementByXPath(nbranchokBtn);
-		nbranchokBtnElement.click();
-
-		test.log(Status.PASS, "Verify select on branch");
-
-		// enter the name
-		String nname = "//*[@id=\"storeProfileInfo\"]/ion-row[3]/ion-col/ion-item/ion-input/input";
-		WebElement nnameElement = driver.findElementByXPath(nname);
-		nnameElement.sendKeys("madhu");
-
-		test.log(Status.PASS, "Verify enter the name");
-
-		// select your are gender
-		String ngender = "//span[text()='Male']";
-		WebElement ngenderElement = driver.findElementByXPath(ngender);
-		ngenderElement.click();
-
-		test.log(Status.PASS, "Verify select your are gender");
-
-		// Enter your date of birth
-		String ndofbirth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement ndofbirthElement = driver.findElementByXPath(ndofbirth);
-		ndofbirthElement.click();
-		ndofbirthElement.sendKeys("14");
-
-		// Enter your month
-		String nmonth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
-		WebElement nmonthElement = driver.findElementByXPath(nmonth);
-		nmonthElement.click();
-		nmonthElement.sendKeys("02");
-
-		// Enter your year
-		String nyear = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[3]/ion-item/ion-input/input";
-		WebElement nyearElement = driver.findElementByXPath(nyear);
-		nyearElement.click();
-		nyearElement.sendKeys("1996");
-
-		test.log(Status.PASS, "Verify Enter your date of birth");
-
-		ApolloUtils.verticalScroll(driver);
+		
+		addFamilyMemberForm(testdata.get("planningForNextBabyMemberName"));
+		
 		ApolloUtils.verticalScroll(driver);
 		ApolloUtils.verticalScroll(driver);
 
@@ -761,14 +375,14 @@ public class ProcessAddFamily extends BaseDriver {
 		calendarElement.click();
 
 		// click on day
-		String cday = "//button[text()='"+testdata.get("PlanningForNextBabyDay")+"']";
+		String cday = "//button[text()='" + testdata.get("PlanningForNextBabyDay") + "']";
 		WebElement cdayBtnElement = driver.findElementByXPath(cday);
 		cdayBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on day");
 
 		// click on month
-		String cmonths = "//button[text()='"+testdata.get("PlanningForNextBabyMonth")+"']";
+		String cmonths = "//button[text()='" + testdata.get("PlanningForNextBabyMonth") + "']";
 		WebElement cmonthsBtnElement = driver.findElementByXPath(cmonths);
 		cmonthsBtnElement.click();
 
@@ -804,23 +418,11 @@ public class ProcessAddFamily extends BaseDriver {
 
 	}
 
-	//@Test(priority = 6)
+	// @Test(priority = 6)
 	public void generalHealth() {
 		ExtentTest test = reports.createTest("AddFamily -GeneralHealth");
 		test.log(Status.INFO, " GeneralHealth starts here...");
 
-/*		// click on main menu button
-		String pmain = "//*[@id=\"menuButton\"]";
-		WebElement pmainElement = driver.findElementByXPath(pmain);
-		pmainElement.click();
-
-		test.log(Status.PASS, "Verify on main menu button");
-
-		// click on My profile
-		String pprofile = "//ion-label[text()='My Profile']";
-		WebElement pprofileElement = driver.findElementByXPath(pprofile);
-		pprofileElement.click();
-*/
 		// click on plus symbol
 		String nplus = "//*[@id=\"menu-content\"]/app-profile/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-row/ion-col[2]/ion-button";
 		WebElement nplusElement = driver.findElementByXPath(nplus);
@@ -898,7 +500,6 @@ public class ProcessAddFamily extends BaseDriver {
 
 		test.log(Status.PASS, "Verify Enter your date of birth");
 
-	
 		ApolloUtils.verticalScroll(driver);
 		ApolloUtils.verticalScroll(driver);
 		ApolloUtils.verticalScroll(driver);
@@ -925,6 +526,74 @@ public class ProcessAddFamily extends BaseDriver {
 		saveDetailsElement.click();
 
 		test.log(Status.PASS, "Verify that the save button gets enabled the moment one of the tags is selected");
+	}
+
+	public void addFamilyMemberForm(String name) {
+		// click on plus symbol
+		String iplus = "//*[@id=\"menu-content\"]/app-profile/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-row/ion-col[2]/ion-button";
+		WebElement iplusElement = driver.findElementByXPath(iplus);
+		iplusElement.click();
+		// test.log(Status.PASS, "Verify click on plus symbol");
+
+		// click on select location
+		String slocation = "//*[@id=\"storeProfileInfo\"]/ion-row[1]/ion-col/ion-item/ion-select";
+		WebElement slocationElement = driver.findElementByXPath(slocation);
+		slocationElement.click();
+
+		// select on location radio button location
+		String lradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
+		WebElement lradioBtnElement = driver.findElementByXPath(lradioBtn);
+		lradioBtnElement.click();
+
+		// click on ok button
+		String cokBtn = "//*[text()='OK']";
+		WebElement cokBtnElement = driver.findElementByXPath(cokBtn);
+		cokBtnElement.click();
+
+		// select on branch
+		String sbranch = "//*[@id='secondSelecet']";
+		WebElement sbranchElement = driver.findElementByXPath(sbranch);
+		sbranchElement.click();
+
+		// select on location radio button location
+		String sbranchradioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
+		WebElement sbranchradioBtnElement = driver.findElementByXPath(sbranchradioBtn);
+		sbranchradioBtnElement.click();
+
+		// click on ok button
+		String cbranchokBtn = "//*[text()='OK']";
+		WebElement cbranchokBtnElement = driver.findElementByXPath(cbranchokBtn);
+		cbranchokBtnElement.click();
+
+		// enter the name
+		String diname = "(//input[@class='native-input sc-ion-input-md'])[1]";
+		WebElement dinameElement = driver.findElementByXPath(diname);
+		dinameElement.sendKeys(name);
+
+		// select your are gender
+		String sgender = "//span[text()='Male']";
+		WebElement sgenderElement = driver.findElementByXPath(sgender);
+		sgenderElement.click();
+
+		// Enter your date of birth
+		String edofbirth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
+		WebElement edofbirthElement = driver.findElementByXPath(edofbirth);
+		edofbirthElement.click();
+		edofbirthElement.sendKeys("14");
+
+		// Enter your month
+		String emonth = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[1]/ion-item/ion-input/input";
+		WebElement emonthElement = driver.findElementByXPath(emonth);
+		emonthElement.click();
+		emonthElement.sendKeys("02");
+
+		// Enter your year
+		String eyear = "//*[@id=\"storeProfileInfo\"]/ion-row[5]/ion-col[2]/ion-row/ion-col[3]/ion-item/ion-input/input";
+		WebElement eyearElement = driver.findElementByXPath(eyear);
+		eyearElement.click();
+		eyearElement.sendKeys("1996");
+		ApolloUtils.verticalScroll(driver);
+
 	}
 
 }

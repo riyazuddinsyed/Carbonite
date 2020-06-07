@@ -58,6 +58,8 @@ public class ProcessVitalsTab extends BaseDriver {
 
 	private void bloodSugarPage(ExtentTest test) {
 		// click on date
+		//button[@type='button'][2]//div[@class='alert-button-inner sc-ion-alert-md']"}
+		
 		String bloodSugarBtn = "//*[@id='menu-content']/app-blood-sugar/ion-content/ion-grid/form/div/ion-row/ion-col[2]/ion-item[1]/ion-datetime";
 		WebElement bloodSugarElement = driver.findElementByXPath(bloodSugarBtn);
 		bloodSugarElement.click();
@@ -440,10 +442,6 @@ public class ProcessVitalsTab extends BaseDriver {
 		}
 		test.log(Status.PASS, "Verify click on track my Activity");
 
-		// click on track my activity back button
-	//	driver.navigate().back();
-	//	driver.navigate().back();
-		
 		//click on history page back button
 		String pastactivityBtn="//*[@id=\"menu-content\"]/app-past-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
 		WebElement pastactivityBtnElement = driver.findElementByXPath(pastactivityBtn);
