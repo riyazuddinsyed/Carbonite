@@ -6,14 +6,14 @@
 	</listeners>
 	<test name="Test">
 		<classes>
-			<class name="com.apollo.cradle.login.Login" />
-			<class name="com.apollo.cradle.addfamily.AddFamilyTest" />
+			<class name="com.apollocradle.tests.LoginPageTest" />	
+			<class name="com.apollocradle.tests.AddFamilyTest" />					
+			<class name="com.apollocradle.tests.ToolsPageTest" />
 			<class name="com.apollo.cradle.profile.ProcessEditProfile" />
 			<class name="com.apollo.cradle.vitals.ProcessVitalsTab" />
-			<!--  <class name="com.apollo.cradle.plans.ProcessPlans" />
-			  <class name="com.apollo.cradle.tools.ProcessTools" />
+			<class name="com.apollo.cradle.plans.ProcessPlans" />
 			
-			 <class name="com.apollo.cradel.menu.ProcessMainMenu" />
+			 <!--<class name="com.apollo.cradel.menu.ProcessMainMenu" />
 			<class name="com.apollo.cradle.signup.ProcessSignUp" />
 			<class name="com.apollo.cradle.booking.ProcessBookTab" />
 			<class name="com.apollo.cradel.changes.ProcessChanges" /> -->

@@ -1,4 +1,4 @@
-package com.apollo.cradle.login;
+package com.apollocradle.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ import com.aventstack.extentreports.Status;
 
 import io.appium.java_client.MobileBy;
 
-public class Login extends BaseDriver {
+public class LoginPageTest extends BaseDriver {
 
 	static String mobileNo = "//*[text()='Mobile Number']//following::input[1]";
 	ExtentTest test;
