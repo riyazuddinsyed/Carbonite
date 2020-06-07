@@ -18,7 +18,8 @@ public class ProcessTools extends BaseDriver {
 		test.log(Status.INFO, "BMICalculation starts here...");
 
 		// Click on the tools
-		String t_tools = "//*[@id=\"tab-button-calculator\"]";
+							//*[@id="tab-button-calculator"]
+		String t_tools = "//*[@id='tab-button-calculator']";
 		WebElement t_toolsElements = driver.findElementByXPath(t_tools);
 		t_toolsElements.click();
 
@@ -87,25 +88,28 @@ public class ProcessTools extends BaseDriver {
 		test.log(Status.PASS, "Verify the click on forward your bmi history");
 
 		// click on forward button history
-		driver.navigate().back();
+		String bmiScorebackBtn="//*[@id=\"menu-content\"]/app-bmi-result/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement bmiScorebackBtnElement = driver.findElementByXPath(bmiScorebackBtn);
+		bmiScorebackBtnElement.click();
 
 		test.log(Status.PASS, "Verify forward button history");
 
 		// click on bmi back button
-		driver.navigate().back();
-
+		String bmibackBtn="//*[@id=\"menu-content\"]/app-bmi/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		WebElement bmibackBtnElement = driver.findElementByXPath(bmibackBtn);
+		bmibackBtnElement.click();
 		test.log(Status.PASS, "Verify click on bmi forward button");
 
 	}
 
-	@Test(priority = 2)
+	//@Test(priority = 2)
 	public void ovulationCalculator() {
 
 		ExtentTest test = reports.createTest("tools - OvulationCalculator");
 		test.log(Status.INFO, "OvulationCalculator starts here...");
 
 		// Click on the tools
-		String otools = "//*[@id=\"tab-button-calculator\"]";
+		String otools = "//*[@id='tab-button-calculator']";
 		WebElement otoolsElements = driver.findElementByXPath(otools);
 		otoolsElements.click();
 
@@ -145,22 +149,12 @@ public class ProcessTools extends BaseDriver {
 		// click on calculate fertile days
 		String fertiledays = "//*[text()=' Calculate Fertile Days ']";
 		WebElement fertiledaysElement = driver.findElementByXPath(fertiledays);
-
-		while (!fertiledaysElement.isDisplayed()) {
-			ApolloUtils.verticalScroll(driver);
-		}
 		fertiledaysElement.click();
-
-		// click on fertility article
-		String article = "//*[@id=\"menu-content\"]/app-ovulation-result/ion-content/ion-grid/ion-row[4]/ion-col/app-blog-slider/ion-row/ion-col[2]/ion-slides/div[1]/ion-slide[2]/ion-row/ion-col/a/ion-row/ion-row/ion-col";
-		WebElement articleElement = driver.findElementByXPath(article);
-		articleElement.click();
-
-		test.log(Status.PASS,
-				"Verify that the graphical view, calendar view, and relevant articles are displayed after selecting the date of the last period and cycle length by clicking the Calculate fertile days button");
-
+		
+		ApolloUtils.verticalScroll(driver);
+		
 		// click on back fertility page
-		String fertilityback = "//*[@id='menu-content']/app-ovulation-result/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
+		String fertilityback = "//*[@id='menu-content']/app-ovulation-result/ion-header/ion-toolbar/ion-buttons/ion-back-button";
 		WebElement fertilitybackElement = driver.findElementByXPath(fertilityback);
 		fertilitybackElement.click();
 
@@ -173,7 +167,7 @@ public class ProcessTools extends BaseDriver {
 		
 	}
 
-	@Test(priority = 3)
+	//@Test(priority = 3)
 	public void dueDateCalculator() {
 
 		ExtentTest test = reports.createTest("tools - DueDateCalculator");

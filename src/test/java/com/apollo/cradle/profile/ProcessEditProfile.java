@@ -1,22 +1,17 @@
 package com.apollo.cradle.profile;
 
-import java.awt.Window;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import com.apollo.cradle.setup.BaseDriver;
 import com.apollo.cradle.util.ApolloUtils;
-import com.apollo.cradle.util.ApolloUtils.ApolloUtilswidth;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 
 public class ProcessEditProfile extends BaseDriver {
@@ -51,8 +46,8 @@ public class ProcessEditProfile extends BaseDriver {
 		test.log(Status.PASS, "Verify on edit profile edit");
 
 		// Enter fullname
-		String fullname = "#menu-content > app-profile-edit > ion-content > ion-grid > ion-row > ion-col.edit-profile-pages.ion-padding.md.hydrated > div > app-basic-info > ion-row.profile-full-height.ion-flex-column.ion-justify-content-between.md.hydrated > form > ion-col:nth-child(1) > ion-item.margin--b15.item-label.item-label-floating.item-interactive.item-input.item.md.ion-focusable.hydrated.item-has-value.ion-untouched.ion-dirty.ion-valid > ion-input > input";
-		WebElement fullnameElement = driver.findElement(MobileBy.cssSelector(fullname));
+		String fullname = "(//input[@class='native-input sc-ion-input-md'])[1]";
+		WebElement fullnameElement = driver.findElementByXPath(fullname);
 		fullnameElement.clear();
 		fullnameElement.sendKeys("madhu");
 
@@ -158,14 +153,14 @@ public class ProcessEditProfile extends BaseDriver {
 		bloodokBtnElement.click();
 
 		// Click on height
-		String height = "#menu-content > app-profile-edit > ion-content > ion-grid > ion-row > ion-col.edit-profile-pages.ion-padding.md.hydrated > div > app-medical-history > ion-row.profile-full-height.ion-flex-column.ion-justify-content-between.md.hydrated > form > ion-col:nth-child(1) > ion-row.ion-justify-content-between.margin--b30.md.hydrated > ion-col:nth-child(1) > ion-item > ion-input > input";
-		WebElement heightElement = driver.findElement(MobileBy.cssSelector(height));
+		String height = "//*[@id=\"menu-content\"]/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[2]/div/app-medical-history/ion-row[2]/form/ion-col[1]/ion-row[1]/ion-col[1]/ion-item/ion-input/input";
+		WebElement heightElement = driver.findElementByXPath(height);
 		heightElement.clear();
 		heightElement.sendKeys("50");
 
 		// Click on weight
-		String weight = "#menu-content > app-profile-edit > ion-content > ion-grid > ion-row > ion-col.edit-profile-pages.ion-padding.md.hydrated > div > app-medical-history > ion-row.profile-full-height.ion-flex-column.ion-justify-content-between.md.hydrated > form > ion-col:nth-child(1) > ion-row.ion-justify-content-between.margin--b30.md.hydrated > ion-col:nth-child(2) > ion-item > ion-input > input";
-		WebElement weightElement = driver.findElement(MobileBy.cssSelector(weight));
+		String weight = "//*[@id=\"menu-content\"]/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[2]/div/app-medical-history/ion-row[2]/form/ion-col[1]/ion-row[1]/ion-col[2]/ion-item/ion-input/input";
+		WebElement weightElement = driver.findElementByXPath(weight);
 		weightElement.clear();
 		weightElement.sendKeys("80");
 
@@ -232,18 +227,38 @@ public class ProcessEditProfile extends BaseDriver {
 		String pregnancyslides = "//*[@id=\"menu-content\"]/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[1]/ion-slides/div/ion-slide[4]";
 		WebElement pregnancyslidesElements = driver.findElementByXPath(pregnancyslides);
 		pregnancyslidesElements.click();
-
 		
+		//Select Birth Outcome
+		String birthOutcomeXPath = "//*[@id='menu-content']/app-add-pregnancy-history/ion-content/ion-grid/form/ion-row[1]/ion-col/ion-item[1]/ion-select";
+		List<WebElement> birthOutcomeElements = driver.findElementsByXPath(birthOutcomeXPath);
+		if(birthOutcomeElements.size()==1)
+			addPregnancyHistory();
+		else
+			viewPregnancyHistory();
+		
+		//click on profile back button
+		/*String profilebackBtn="//*[@id=\"menu-content\"]/app-profile/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
+		WebElement profilebackBtnElement = driver.findElementByXPath(profilebackBtn);
+		profilebackBtnElement.click();
+		*/
+		driver.navigate().back();  
+		driver.navigate().back();
+		driver.navigate().back();
+	}
+	
+	private void viewPregnancyHistory() {
 		// click on add more pregnancy history
 		String  addPregnancyHistoryBtnXPath= "//*[@id='menu-content']/app-profile-edit/ion-content/ion-grid/ion-row/ion-col[2]/div/app-pregnancy-history/ion-row[2]/ion-col[2]/ion-button";
-		WebElement addPregnancyHistoryBtnElement = driver.findElementByXPath(addPregnancyHistoryBtnXPath);
-		
+		WebElement addPregnancyHistoryBtnElement = driver.findElementByXPath(addPregnancyHistoryBtnXPath);		
 
 		while (!addPregnancyHistoryBtnElement.isDisplayed()) {
 			ApolloUtils.verticalScroll(driver);			
 		}
 		addPregnancyHistoryBtnElement.click();
-	
+		addPregnancyHistory();
+	}
+
+	public void addPregnancyHistory() {
 		// click birth outcome button
 		String tabSelector = "//*[@id='menu-content']/app-add-pregnancy-history/ion-content/ion-grid/form/ion-row[1]/ion-col/ion-item[1]/ion-select";
 		WebElement tabElement = driver.findElementByXPath(tabSelector);
@@ -330,17 +345,6 @@ public class ProcessEditProfile extends BaseDriver {
 		String addBtn="//*[@id=\"menu-content\"]/app-add-pregnancy-history/ion-header/ion-toolbar/ion-buttons/ion-back-button";
 		WebElement addBtnElement = driver.findElementByXPath(addBtn);
 		addBtnElement.click();
-		
-		
-		//click on profile back button
-		/*String profilebackBtn="//*[@id=\"menu-content\"]/app-profile/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
-		WebElement profilebackBtnElement = driver.findElementByXPath(profilebackBtn);
-		profilebackBtnElement.click();
-		*/
-		driver.navigate().back();  
-		driver.navigate().back();
-		driver.navigate().back();
-		
-		
+
 	}
 }

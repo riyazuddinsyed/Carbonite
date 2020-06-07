@@ -209,7 +209,7 @@ public class ProcessAddFamily extends BaseDriver {
 		cbranchokBtnElement.click();
 
 		// enter the name
-		String diname = "//*[@id=\"storeProfileInfo\"]/ion-row[3]/ion-col/ion-item/ion-input/input";
+		String diname = "//ion-label[text()='Name']";
 		WebElement dinameElement = driver.findElementByXPath(diname);
 		dinameElement.sendKeys("madhu");
 		// driver.findElement(By.xpath("//*[text()='Name']")).sendKeys("madhureddy");
