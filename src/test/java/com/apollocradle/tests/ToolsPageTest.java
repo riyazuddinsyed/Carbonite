@@ -94,14 +94,14 @@ public class ToolsPageTest extends BaseDriver {
 		test.log(Status.PASS, "Verify forward button history");
 
 		// click on bmi back button
-		String bmibackBtn="//*[@id=\"menu-content\"]/app-bmi/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		String bmibackBtn="//*[@id='menu-content']/app-bmi/ion-header/ion-toolbar/ion-buttons/ion-back-button";
 		WebElement bmibackBtnElement = driver.findElementByXPath(bmibackBtn);
 		bmibackBtnElement.click();
 		test.log(Status.PASS, "Verify click on bmi forward button");
 
 	}
 
-	//@Test(priority = 2)
+	@Test(priority = 2)
 	public void ovulationCalculator() {
 
 		ExtentTest test = reports.createTest("tools - OvulationCalculator");
@@ -159,14 +159,9 @@ public class ToolsPageTest extends BaseDriver {
 
 		test.log(Status.PASS, "Verify click on back fertility page");
 		
-		//click on ovulation back button
-		String ovulationBackBtn="//*[@id=\"menu-content\"]/app-ovulation/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
-		WebElement ovulationBackBtnElement = driver.findElementByXPath(ovulationBackBtn);
-		ovulationBackBtnElement.click();
-		
 	}
 
-	//@Test(priority = 3)
+	@Test(priority = 3)
 	public void dueDateCalculator() {
 
 		ExtentTest test = reports.createTest("tools - DueDateCalculator");
@@ -178,11 +173,16 @@ public class ToolsPageTest extends BaseDriver {
 		datetoolsElements.click();
 
 		// click on due date calculator
-		String due = "//*[@id=\"menu-content\"]/app-tabs/ion-tabs/div/ion-router-outlet/app-calculators/ion-content/ion-grid/ion-row[2]/ion-col[3]/ion-button";
+		String due = "//span[text()='Due Date Calcuator']";
 		WebElement dueElement = driver.findElementByXPath(due);
 		dueElement.click();
 
 		test.log(Status.PASS, "Verify on due date calculator");
+		
+		//click on date button
+		String dateBtn="//*[@id=\"menu-content\"]/app-due-date/ion-content/ion-grid/form/div/ion-row[2]/ion-col/ion-item/ion-datetime";
+		WebElement dateBtnElement = driver.findElementByXPath(dateBtn);
+		dateBtnElement.click();
 
 		// click on day
 		String days = "//button[text()='" + testdata.get("dueDateCalculatorDay") + "']";
