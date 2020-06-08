@@ -1,9 +1,6 @@
-package com.apollo.cradle.plans;
-
-import java.awt.Scrollbar;
+package com.apollocradle.tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -11,15 +8,10 @@ import com.apollo.cradle.setup.BaseDriver;
 import com.apollo.cradle.util.ApolloUtils;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.Test;
 
-public class ProcessPlans extends BaseDriver {
+public class PlansPageTest extends BaseDriver {
 
-	@Test
+	@Test(priority = 51)
 	public void plans() {
 		ExtentTest test = reports.createTest("Plans");
 		test.log(Status.INFO, " Plans starts here...");
@@ -55,12 +47,12 @@ public class ProcessPlans extends BaseDriver {
 		dateElement.click();
 
 		// click on day
-		String days = "//button[text()='"+testdata.get("plansDay")+"']";
+		String days = "//button[text()='" + testdata.get("plansDay") + "']";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
 
 		// click on month
-		String month = "//button[text()='"+testdata.get("plansMonth")+"']";
+		String month = "//button[text()='" + testdata.get("plansMonth") + "']";
 		WebElement monthBtnElement = driver.findElementByXPath(month);
 		monthBtnElement.click();
 
@@ -74,26 +66,27 @@ public class ProcessPlans extends BaseDriver {
 		WebElement doneBtnElement = driver.findElementByXPath(doneBtn);
 		doneBtnElement.click();
 
-		//click on Activity time
-		driver.findElement(By.xpath("//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-item[3]/ion-datetime")).click();
-		
-		
-		//click on Done button
-		String timedone="//*[text()='Done']";
+		// click on Activity time
+		driver.findElement(By.xpath(
+				"//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-item[3]/ion-datetime"))
+				.click();
+
+		// click on Done button
+		String timedone = "//*[text()='Done']";
 		WebElement timedoneElement = driver.findElementByXPath(timedone);
 		timedoneElement.click();
-		
-		//click on activity name
+
+		// click on activity name
 		String activityname = "//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-row[2]/ion-col/ion-item/ion-input/input";
 		WebElement activitynameElement = driver.findElementByXPath(activityname);
 		activitynameElement.sendKeys("walking");
-		
+
 		ApolloUtils.verticalScroll(driver);
-		
-		//click on save button
-		String saveBtn="//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-row[4]/ion-col/ion-button";
+
+		// click on save button
+		String saveBtn = "//*[@id=\"menu-content\"]/app-add-care-plan/ion-content/ion-grid/div/form/ion-row[4]/ion-col/ion-button";
 		WebElement saveBtnElement = driver.findElementByXPath(saveBtn);
 		saveBtnElement.click();
-		
+
 	}
 }

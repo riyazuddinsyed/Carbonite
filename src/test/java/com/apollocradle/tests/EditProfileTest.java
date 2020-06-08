@@ -1,4 +1,4 @@
-package com.apollo.cradle.profile;
+package com.apollocradle.tests;
 
 import java.util.List;
 
@@ -14,12 +14,9 @@ import com.aventstack.extentreports.Status;
 
 import io.appium.java_client.MobileBy;
 
-public class ProcessEditProfile extends BaseDriver {
+public class EditProfileTest extends BaseDriver {
 
-	private Object ApolloUtilsMenu;
-
-	@Test(priority = 0)
-
+	@Test(priority = 61)
 	public void basicInfo() {
 		ExtentTest test = reports.createTest("EditProfile - Basic Info");
 		test.log(Status.INFO, " Basic Info starts here...");
@@ -127,7 +124,7 @@ public class ProcessEditProfile extends BaseDriver {
 
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 62)
 	public void medicalHistory() {
 		ExtentTest test = reports.createTest("EditProfile - MedicalHistory");
 		test.log(Status.INFO, " MedicalHistory starts here...");
@@ -182,8 +179,7 @@ public class ProcessEditProfile extends BaseDriver {
 
 	}
 
-	@Test(priority = 2)
-
+	@Test(priority = 63)
 	public void familyHistory() {
 
 		ExtentTest test = reports.createTest("EditProfile - FamilyHistory");
@@ -219,7 +215,7 @@ public class ProcessEditProfile extends BaseDriver {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 64)
 	public void pregnancyHistory() {
 		ExtentTest test = reports.createTest("EditProfile - PregnancyHistory");
 		test.log(Status.INFO, " PregnancyHistory starts here...");
@@ -259,15 +255,15 @@ public class ProcessEditProfile extends BaseDriver {
 		String pregnancyHistoryPageBackBtnXPath = "//*[@id='menu-content']/app-profile-edit/ion-header/ion-toolbar/ion-buttons/ion-back-button";
 		WebElement pregnancyHistoryPageBackBtn = driver.findElementByXPath(pregnancyHistoryPageBackBtnXPath);
 		pregnancyHistoryPageBackBtn.click();
-		
+
 		String addPpregnancyHistoryPageBackBtnXPath = "//*[@id=\"menu-content\"]/app-add-pregnancy-history/ion-header/ion-toolbar/ion-buttons/ion-back-button";
 		WebElement addPpregnancyHistoryPageBackBtn = driver.findElementByXPath(addPpregnancyHistoryPageBackBtnXPath);
 		addPpregnancyHistoryPageBackBtn.click();
-		
+
 		String editProfilePageBackBtnXPath = "//*[@id=\"menu-content\"]/app-profile-edit/ion-header/ion-toolbar/ion-buttons/ion-back-button";
 		WebElement editProfilePageBackBtn = driver.findElementByXPath(editProfilePageBackBtnXPath);
 		editProfilePageBackBtn.click();
-		
+
 		String profilePageBackBtnXPath = "//*[@id=\"menu-content\"]/app-profile/ion-header/ion-toolbar/ion-buttons/ion-back-button";
 		WebElement profilePageBackBtn = driver.findElementByXPath(profilePageBackBtnXPath);
 		profilePageBackBtn.click();

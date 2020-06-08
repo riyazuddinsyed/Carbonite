@@ -1,4 +1,4 @@
-package com.apollo.cradle.vitals;
+package com.apollocradle.tests;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import com.aventstack.extentreports.Status;
 
 import io.appium.java_client.MobileBy;
 
-public class ProcessVitalsTab extends BaseDriver {
-	@Test(priority = 1)
+public class VitalsPageTest extends BaseDriver {
+	@Test(priority = 41)
 	public void bloodSugar() {
 		ExtentTest test = reports.createTest("vitals - Blood Sugar");
 		test.log(Status.INFO, " Blood Sugar starts here...");
@@ -50,16 +50,16 @@ public class ProcessVitalsTab extends BaseDriver {
 
 		// click on blood sugar back tab
 		driver.navigate().back();
-		
-		//click on history tab  back button
+
+		// click on history tab back button
 		driver.navigate().back();
 
 	}
 
 	private void bloodSugarPage(ExtentTest test) {
 		// click on date
-		//button[@type='button'][2]//div[@class='alert-button-inner sc-ion-alert-md']"}
-		
+		// button[@type='button'][2]//div[@class='alert-button-inner sc-ion-alert-md']"}
+
 		String bloodSugarBtn = "//*[@id='menu-content']/app-blood-sugar/ion-content/ion-grid/form/div/ion-row/ion-col[2]/ion-item[1]/ion-datetime";
 		WebElement bloodSugarElement = driver.findElementByXPath(bloodSugarBtn);
 		bloodSugarElement.click();
@@ -122,12 +122,10 @@ public class ProcessVitalsTab extends BaseDriver {
 		savedataElement.click();
 
 		test.log(Status.PASS, "Verify click on savedata button ");
-		
-		
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 42)
 	private void bloodPressure() {
 		ExtentTest test = reports.createTest("vitals - BloodPressure");
 		test.log(Status.INFO, "BloodPressure starts here...");
@@ -158,24 +156,26 @@ public class ProcessVitalsTab extends BaseDriver {
 		test.log(Status.PASS,
 				"Verify that there is a log your blood sugar button at the bottom of the screen which can be used to log another set of data");
 
-		
-		/*String backBtn = "//*[@id=\"menu-content\"]/app-past-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement backBtnElement = driver.findElementByXPath(backBtn);
-		backBtnElement.click();
-*/		
+		/*
+		 * String backBtn =
+		 * "//*[@id=\"menu-content\"]/app-past-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		 * WebElement backBtnElement = driver.findElementByXPath(backBtn);
+		 * backBtnElement.click();
+		 */
 		// click on back button to history page
 		driver.navigate().back();
 
-		
-	/*	String backpressure = "//*[@id='menu-content']/app-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
-		WebElement backpressureElement = driver.findElementByXPath(backpressure);
-		backpressureElement.click();*/
-		
+		/*
+		 * String backpressure =
+		 * "//*[@id='menu-content']/app-blood-pressure/ion-header/ion-toolbar/ion-buttons/ion-back-button";
+		 * WebElement backpressureElement = driver.findElementByXPath(backpressure);
+		 * backpressureElement.click();
+		 */
+
 		// click on blood pressure back button
 		driver.navigate().back();
 		driver.navigate().back();
-		
-		
+
 	}
 
 	private void bloodPressurePage(ExtentTest test) {
@@ -245,7 +245,7 @@ public class ProcessVitalsTab extends BaseDriver {
 
 	}
 
-	// @Test(priority=3)
+	@Test(priority = 43)
 	private void documents() {
 		ExtentTest test = reports.createTest("vitals - Documents");
 		test.log(Status.INFO, "Documents starts here...");
@@ -308,7 +308,7 @@ public class ProcessVitalsTab extends BaseDriver {
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 44)
 	private void weightTracker() {
 		ExtentTest test = reports.createTest("vitals - WeightTracker");
 		test.log(Status.INFO, "WeightTracker starts here...");
@@ -406,12 +406,12 @@ public class ProcessVitalsTab extends BaseDriver {
 		saveBtnElement.click();
 
 		test.log(Status.PASS, "Verify ckic on save button");
-		//click on your back button
+		// click on your back button
 		driver.navigate().back();
 
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 45)
 	private void trackMyActivity() {
 
 		ExtentTest test = reports.createTest("vitals - TrackMyActivity");
@@ -442,17 +442,16 @@ public class ProcessVitalsTab extends BaseDriver {
 		}
 		test.log(Status.PASS, "Verify click on track my Activity");
 
-		//click on history page back button
-		String pastactivityBtn="//*[@id=\"menu-content\"]/app-past-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
+		// click on history page back button
+		String pastactivityBtn = "//*[@id=\"menu-content\"]/app-past-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
 		WebElement pastactivityBtnElement = driver.findElementByXPath(pastactivityBtn);
 		pastactivityBtnElement.click();
-		
-		//click on form page back button
-		String trackactivityBtn="//*[@id=\"menu-content\"]/app-track-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
+
+		// click on form page back button
+		String trackactivityBtn = "//*[@id=\"menu-content\"]/app-track-activity/ion-header/ion-toolbar/ion-buttons/ion-back-button/button";
 		WebElement trackactivityBtnElement = driver.findElementByXPath(trackactivityBtn);
 		trackactivityBtnElement.click();
-		
-		
+
 	}
 
 	private void trackactivityPage(ExtentTest test) {

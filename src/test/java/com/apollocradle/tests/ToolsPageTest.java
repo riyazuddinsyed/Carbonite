@@ -10,7 +10,7 @@ import com.aventstack.extentreports.Status;
 
 public class ToolsPageTest extends BaseDriver {
 
-	@Test(priority = 1)
+	@Test(priority = 11)
 	public void bloodCalculation() {
 
 		ExtentTest test = reports.createTest("tools - BMICalculation");
@@ -101,7 +101,7 @@ public class ToolsPageTest extends BaseDriver {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 12)
 	public void ovulationCalculator() {
 
 		ExtentTest test = reports.createTest("tools - OvulationCalculator");
@@ -161,7 +161,7 @@ public class ToolsPageTest extends BaseDriver {
 		
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 13)
 	public void dueDateCalculator() {
 
 		ExtentTest test = reports.createTest("tools - DueDateCalculator");
@@ -230,7 +230,7 @@ public class ToolsPageTest extends BaseDriver {
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 14)
 	public void kickCounter() {
 
 		ExtentTest test = reports.createTest("tools - KickCounter");
@@ -292,7 +292,7 @@ public class ToolsPageTest extends BaseDriver {
 
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 15)
 	public void contractionTimer() throws InterruptedException {
 
 		ExtentTest test = reports.createTest("tools - ContractionTimer");

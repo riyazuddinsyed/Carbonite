@@ -1,4 +1,4 @@
-package com.apollo.cradle.booking;
+package com.apollocradle.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,28 +11,25 @@ import com.aventstack.extentreports.Status;
 
 import io.appium.java_client.MobileBy;
 
-public class ProcessBookTab extends BaseDriver {
+public class BookPageTest extends BaseDriver {
 
-	 //@Test
+	@Test(priority = 21)
 	public void bookAnAppoinment() {
 		ExtentTest test = reports.createTest("Book - Book An Appoinment");
 		test.log(Status.INFO, "  Book An Appoinment starts here...");
 
 		// Click on booking
-		// *[@id="tab-button-book"]
 		String bookingBtn = "//*[@id='tab-button-book']";
 		WebElement bookingElement = driver.findElementByXPath(bookingBtn);
 		bookingElement.click();
-System.out.println(1);
+
 		test.log(Status.PASS,
 				"Verify that on clicking Book icon user is shown options depending on his phase for phase two there will be three options and for all other faces there will be only two options. Phase 2 will extra option of booking a bed and all phases will have an option of book an appointment and request a health check");
 
 		// Click on book an appoinment
-		// *[@id="menu-content"]/app-tabs/ion-tabs/div/ion-router-outlet/app-bookings/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-button
 		String appoinmentBtn = "//*[@id=\"menu-content\"]/app-tabs/ion-tabs/div/ion-router-outlet/app-bookings/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-button";
 		WebElement appoinmentElement = driver.findElementByXPath(appoinmentBtn);
 		appoinmentElement.click();
-System.out.println(2);
 		test.log(Status.PASS, "after click on book an appoinment");
 
 		// click on name and select
@@ -41,33 +38,30 @@ System.out.println(2);
 		appointmentElement.click();
 
 		test.log(Status.PASS, "after click on book an appoinment select name");
-System.out.println(3);
+
 		// select on radio button for name
 		String name = "//button[@type='button'][2]//div[@class='alert-button-inner sc-ion-alert-md']";
 		WebElement nameElement = driver.findElementByXPath(name);
 		nameElement.click();
-System.out.println(4);
 		test.log(Status.PASS, "verify radio button");
 
 		// click on ok button for name
 		String okBtnnane = "//button[@type='button'][2]//span[@class='alert-button-inner sc-ion-alert-md']";
 		WebElement okBtnnameElement = driver.findElementByXPath(okBtnnane);
 		okBtnnameElement.click();
-System.out.println(5);
+		System.out.println(5);
 		test.log(Status.PASS, "verify ok button");
 
 		// Select on City
 		String city = "//*[@id=\"menu-content\"]/app-appointment-tabs/ion-tabs/div/ion-router-outlet/app-new-appointment/form/ion-content/ion-grid[1]/ion-row/ion-row[2]/ion-col/ion-item/ion-select";
 		WebElement cityElement = driver.findElementByXPath(city);
 		cityElement.click();
-System.out.println(6);
 		test.log(Status.PASS, "Verify click on Branch button");
 
 		// click on radio button
 		String radioBtn = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
 		WebElement radioBtnElement = driver.findElementByXPath(radioBtn);
 		radioBtnElement.click();
-System.out.println(7);
 		test.log(Status.PASS, "Verify click on radio button");
 
 		// click on ok button
@@ -76,23 +70,23 @@ System.out.println(7);
 		okBtnElement.click();
 
 		test.log(Status.PASS, "Verify click on ok button");
-System.out.println(8);
+		
 		// click on branch
 		String branch = "//*[@id='secondSelecet']";
 		WebElement branchElement = driver.findElementByXPath(branch);
 		branchElement.click();
-System.out.println(9);
+
 		// click on radio button
 		String radioBts = "//button[@type='button'][3]//div[@class='alert-radio-icon sc-ion-alert-md']";
 		WebElement radioBtsElement = driver.findElementByXPath(radioBts);
 		radioBtsElement.click();
-System.out.println(10);
+
 		// click on ok button
 		String okBtns = "//button[@type='button'][2]//span[@class='alert-button-inner sc-ion-alert-md']";
 		WebElement okBtnsElement = driver.findElementByXPath(okBtns);
 		okBtnsElement.click();
-System.out.println(11);
-		// Select on packages
+
+		// Select your Speciality
 		driver.findElementByXPath("//*[text()='Obstetrician & Gynecologist']").click();
 
 		test.log(Status.PASS, "Verify packages which needs to patien");
@@ -101,23 +95,23 @@ System.out.println(11);
 		String doctor = "(//*[@id='menu-content']/app-select-doctors/ion-content/ion-grid/ion-row[4]/ion-col[2]/ion-button)";
 		WebElement doctorElement = driver.findElementByXPath(doctor);
 		doctorElement.click();
-System.out.println(12);
+		System.out.println(12);
 		test.log(Status.PASS,
 				"Verify that on click of the view date and time slots option a calendar view is opened which has all the dates for which this doctor is available along with the time slots for each days"); // select
 																																																				// on
 		// click on day
-		String days = "(//p[text()='"+("bookAnAppoinmentDay")+"'])[2]";
+		String days = "(//p[text()='" + ("bookAnAppoinmentDay") + "'])[2]";
 		WebElement daysBtnElement = driver.findElementByXPath(days);
 		daysBtnElement.click();
-System.out.println(13);
+		System.out.println(13);
 		ApolloUtils.verticalScroll(driver);
 		test.log(Status.PASS, "Verify date slots are available for which has available with date and time");
 
 		// click time doctor slots
-		String time = "//span[text()='"+("bookAnAppoinmentTime")+"']";
+		String time = "//span[text()='" + ("bookAnAppoinmentTime") + "']";
 		WebElement timeElement = driver.findElementByXPath(time);
 		timeElement.click();
-System.out.println(14);
+		System.out.println(14);
 		test.log(Status.PASS, "Verify date slots are available for which has available with date and time");
 
 		ApolloUtils.verticalScroll(driver);
@@ -126,16 +120,16 @@ System.out.println(14);
 		String onlineBtn = "//*[@id=\"menu-content\"]/app-time-slots/ion-content/ion-grid/form/ion-row[2]/ion-col/ion-button";
 		WebElement onlineElement = driver.findElementByXPath(onlineBtn);
 		onlineElement.click();
-System.out.println(15);
+		System.out.println(15);
 		// click on done button
 		String doneBtn = "";
 		WebElement doneBtnElement = driver.findElementByXPath(doneBtn);
 		doneBtnElement.click();
 		test.log(Status.PASS, "Verify click on book online button");
-System.out.println(16);
+		System.out.println(16);
 	}
 
-	// @Test
+	@Test(priority = 22)
 	private void bookDelivery() {
 		ExtentTest test = reports.createTest("Book - Book Delivery");
 		test.log(Status.INFO, " Book Delivery starts here...");
@@ -306,18 +300,19 @@ System.out.println(16);
 		countryElement.click();
 
 		// select radio button
-		String radioBtn = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]\r\n"+ "";
+		String radioBtn = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]\r\n"
+				+ "";
 		WebElement radioBtnElement = driver.findElementByXPath(radioBtn);
 		radioBtnElement.click();
 
 	}
 
-	//@Test
+	@Test(priority = 23)
 	private void requestHealthCheck() {
 		ExtentTest test = reports.createTest("Book - Request Health Check");
 		test.log(Status.INFO, "Request Health Check starts here...");
 
-		// Click on booking 
+		// Click on booking
 		String bookingBtn = "//*[@id='tab-button-book']";
 		WebElement bookingElement = driver.findElementByXPath(bookingBtn);
 		bookingElement.click();
@@ -363,12 +358,12 @@ System.out.println(16);
 		String radioBtn = "//button[@type='button'][4]//div[@class='alert-radio-icon sc-ion-alert-md']";
 		WebElement radioBtnElement = driver.findElementByXPath(radioBtn);
 		radioBtnElement.click();
-		
+
 		// click on ok button
 		String okBtn = "//button[@type='button'][2]//span[@class='alert-button-inner sc-ion-alert-md']";
 		WebElement okBtnElement = driver.findElementByXPath(okBtn);
 		okBtnElement.click();
-		
+
 		// Select on branch
 		String branch = "//*[@id='secondSelecet']";
 		WebElement branchElement = driver.findElementByXPath(branch);
@@ -380,7 +375,7 @@ System.out.println(16);
 		String radioBtns = "//button[@type='button'][3]//div[@class='alert-radio-label sc-ion-alert-md']";
 		WebElement radioBtnsElement = driver.findElementByXPath(radioBtns);
 		radioBtnsElement.click();
-		
+
 		test.log(Status.PASS, "verify radio button");
 
 		// click on ok button
@@ -389,14 +384,14 @@ System.out.println(16);
 		okBtnsElement.click();
 
 		test.log(Status.PASS, "verify ok button");
-		
+
 		ApolloUtils.verticalScroll(driver);
-		
+
 		// Select your package
 		String pack = "//span[text()='Women - Teens']";
 		WebElement packElement = driver.findElementByXPath(pack);
 		packElement.click();
-		
+
 		test.log(Status.PASS, "verify select your package ");
 
 		// Click on health check button
